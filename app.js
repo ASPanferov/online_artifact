@@ -173,7 +173,7 @@ function setupIntersectionObserver() {
 
 // Animate slide content when it comes into view
 function animateSlideContent(slide) {
-    const animatedElements = slide.querySelectorAll('.achievement-card, .problem-card, .point-item, .timeline-item');
+    const animatedElements = slide.querySelectorAll('.achievement-card, .problem-card, .point-item, .timeline-item, .problem-icon');
     
     animatedElements.forEach((element, index) => {
         setTimeout(() => {

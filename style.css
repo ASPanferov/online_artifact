@@ -762,23 +762,46 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.problem-slide .bullet-item {
+.problem-icons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.problem-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
     opacity: 0;
-    transform: translateX(-20px);
+    transform: scale(0.8);
 }
 
-.problem-slide.active .bullet-item {
-    animation: slideInLeft 0.6s forwards;
+.problem-icon i {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-blue);
 }
 
-.problem-slide.active .bullet-item:nth-child(1) { animation-delay: 0.2s; }
-.problem-slide.active .bullet-item:nth-child(2) { animation-delay: 0.4s; }
-.problem-slide.active .bullet-item:nth-child(3) { animation-delay: 0.6s; }
-.problem-slide.active .bullet-item:nth-child(4) { animation-delay: 0.8s; }
+.problem-icon span {
+    color: var(--color-text);
+    font-size: 1rem;
+}
 
-@keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
+.problem-slide.active .problem-icon {
+    animation: iconPop 0.6s forwards;
+}
+
+.problem-slide.active .problem-icon:nth-child(1) { animation-delay: 0.2s; }
+.problem-slide.active .problem-icon:nth-child(2) { animation-delay: 0.4s; }
+.problem-slide.active .problem-icon:nth-child(3) { animation-delay: 0.6s; }
+.problem-slide.active .problem-icon:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes iconPop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 .solution-slide {
