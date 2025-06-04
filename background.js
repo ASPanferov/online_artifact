@@ -9,57 +9,52 @@ function initBackground3D() {
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.position.z = 50;
+    camera.position.z = 70;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
     const objects = [];
 
     const geometries = [
-        new THREE.SphereGeometry(1, 16, 16),
-        new THREE.TorusGeometry(1, 0.4, 16, 32),
-        new THREE.BoxGeometry(1.4, 1.4, 1.4),
-        new THREE.ConeGeometry(1, 1.5, 4)
+        new THREE.IcosahedronGeometry(4, 1),
+        new THREE.TorusKnotGeometry(3, 1, 100, 16),
+        new THREE.CylinderGeometry(3, 3, 6, 32),
+        new THREE.OctahedronGeometry(4, 1)
     ];
 
-    for (let i = 0; i < 25; i++) {
-        const glow = Math.random() > 0.7;
-        const material = new THREE.MeshPhongMaterial({
+    for (let i = 0; i < 4; i++) {
+        const material = new THREE.MeshStandardMaterial({
             color: 0x3399ff,
-            emissive: glow ? 0x66aaff : 0x000000,
-            shininess: 80,
+            metalness: 0.5,
+            roughness: 0.2,
             transparent: true,
-            opacity: 0.7
+            opacity: 0.85
         });
         const geometry = geometries[Math.floor(Math.random() * geometries.length)];
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set((Math.random() - 0.5) * 60, (Math.random() - 0.5) * 60, (Math.random() - 0.5) * 60);
-        mesh.userData.velocity = new THREE.Vector3((Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1);
+        mesh.position.set((Math.random() - 0.5) * 40, (Math.random() - 0.5) * 40, (Math.random() - 0.5) * 40);
+        mesh.userData.velocity = new THREE.Vector3((Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.02, (Math.random() - 0.5) * 0.02);
         scene.add(mesh);
         objects.push(mesh);
     }
 
-    const pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(0, 0, 60);
-    scene.add(pointLight);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
+    hemiLight.position.set(0, 20, 0);
+    scene.add(hemiLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(5, 10, 7.5);
+    scene.add(dirLight);
 
     function animate() {
         requestAnimationFrame(animate);
         objects.forEach(obj => {
             obj.position.add(obj.userData.velocity);
-            const limit = 30;
-            if (obj.position.x > limit) obj.position.x = -limit;
-            if (obj.position.x < -limit) obj.position.x = limit;
-            if (obj.position.y > limit) obj.position.y = -limit;
-            if (obj.position.y < -limit) obj.position.y = limit;
-            if (obj.position.z > limit) obj.position.z = -limit;
-            if (obj.position.z < -limit) obj.position.z = limit;
-            obj.rotation.x += 0.01;
-            obj.rotation.y += 0.01;
+            obj.rotation.x += 0.005;
+            obj.rotation.y += 0.005;
         });
         renderer.render(scene, camera);
     }
