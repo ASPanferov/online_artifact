@@ -796,11 +796,20 @@ body {
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(8px);
+    background: transparent;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 25px rgba(37, 99, 235, 0.6);
+    animation: blue-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes blue-glow {
+    from {
+        box-shadow: 0 0 15px rgba(37, 99, 235, 0.3);
+    }
+    to {
+        box-shadow: 0 0 35px rgba(37, 99, 235, 0.8);
+    }
 }
 
 /* Typography */
