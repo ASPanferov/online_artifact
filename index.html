@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проект LIMA - Презентация</title>
+    <title>Angel Connect - Презентация</title>
     <link rel="stylesheet" href="style.css">
     <!-- Lucide icons with fallback -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script>
-        // Fallback для Lucide если основная версия не загрузилась
         if (typeof lucide === 'undefined') {
             const fallbackScript = document.createElement('script');
             fallbackScript.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
@@ -27,6 +26,12 @@
         <div class="nav-dot" data-slide="5"></div>
         <div class="nav-dot" data-slide="6"></div>
         <div class="nav-dot" data-slide="7"></div>
+        <div class="nav-dot" data-slide="8"></div>
+        <div class="nav-dot" data-slide="9"></div>
+        <div class="nav-dot" data-slide="10"></div>
+        <div class="nav-dot" data-slide="11"></div>
+        <div class="nav-dot" data-slide="12"></div>
+        <div class="nav-dot" data-slide="13"></div>
     </nav>
 
     <!-- Progress Bar -->
@@ -35,270 +40,156 @@
     </div>
 
     <main class="presentation">
-        <!-- Slide 1: Main Title -->
+        <!-- Slide 1: Title -->
         <section class="slide active" id="slide-0">
             <div class="slide-content">
                 <div class="hero-content">
-                    <h1 class="hero-title fade-in">Проект LIMA</h1>
-                    <p class="hero-subtitle fade-in-delay">Интегрированная CRM-система для фармацевтического холдинга</p>
-                    <div class="hero-stats fade-in-delay-2">
-                        <div class="stat-item">
-                            <div class="stat-number">400</div>
-                            <div class="stat-label">активных пользователей</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">7</div>
-                            <div class="stat-label">модулей системы</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">года разработки</div>
-                        </div>
-                    </div>
+                    <h1 class="hero-title">Angel Connect</h1>
+                    <p class="hero-subtitle">Закрытый клуб ангел-инвесторов для развития AI-стартапов в Центральной Азии</p>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 2: About Project -->
+        <!-- Slide 2: Проблема -->
         <section class="slide" id="slide-1">
             <div class="slide-content">
-                <h2 class="slide-title">О проекте</h2>
-                <div class="content-grid">
-                    <div class="description-block">
-                        <p class="description">ERP/CRM система, разрабатываемая 3 года с активной базой 400 пользователей</p>
-                    </div>
-                    <div class="achievements-grid">
-                        <div class="achievement-card">
-                            <i data-lucide="users"></i>
-                            <span>400 активных пользователей</span>
-                        </div>
-                        <div class="achievement-card">
-                            <i data-lucide="layers"></i>
-                            <span>7 модулей различной готовности</span>
-                        </div>
-                        <div class="achievement-card">
-                            <i data-lucide="calendar"></i>
-                            <span>3 года непрерывной разработки</span>
-                        </div>
-                        <div class="achievement-card">
-                            <i data-lucide="link"></i>
-                            <span>Интеграция с 1С УТ</span>
-                        </div>
-                        <div class="achievement-card">
-                            <i data-lucide="smartphone"></i>
-                            <span>WEBApp приложение</span>
-                        </div>
-                        <div class="achievement-card">
-                            <i data-lucide="shield-check"></i>
-                            <span>Система ролей и прав</span>
-                        </div>
-                        <div class="achievement-card">
-                            <i data-lucide="api"></i>
-                            <span>API для внешних интеграций</span>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="slide-title">Проблема</h2>
+                <ul>
+                    <li>Стартапы не находят "умные деньги" с отраслевой экспертизой</li>
+                    <li>Инвесторы работают в одиночку, упуская синергию</li>
+                    <li>Отсутствует качественная воронка проверенных проектов</li>
+                    <li>Нет системного подхода к развитию региональной экосистемы</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Slide 3: Timeline -->
+        <!-- Slide 3: Наше решение -->
         <section class="slide" id="slide-2">
             <div class="slide-content">
-                <h2 class="slide-title">Хронология проекта</h2>
-                <div class="timeline">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Июль 2023</div>
-                            <div class="timeline-title">Начало проекта LIMA</div>
-                            <div class="timeline-desc">Пересборка команды разработки, первые обсуждения архитектуры</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Август 2023</div>
-                            <div class="timeline-title">Разработка базовых модулей</div>
-                            <div class="timeline-desc">Создание первых CRM модулей, настройка инфраструктуры</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Сентябрь-Декабрь 2023</div>
-                            <div class="timeline-title">Активная разработка</div>
-                            <div class="timeline-desc">Создание системы визитов, интеграция с DPD, разработка API</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Январь-Март 2024</div>
-                            <div class="timeline-title">Масштабирование функционала</div>
-                            <div class="timeline-desc">Добавление новых компаний, улучшение UX/UI, оптимизация</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Апрель-Май 2024</div>
-                            <div class="timeline-title">Стабилизация и рост</div>
-                            <div class="timeline-desc">Достижение 400 пользователей, работа над производительностью</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-dot"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">Май 2025</div>
-                            <div class="timeline-title">Консалтинговый аудит</div>
-                            <div class="timeline-desc">Привлечение Артёма Панферова для анализа и оптимизации</div>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="slide-title">Наше решение</h2>
+                <p>Angel Connect объединяет ангел-инвесторов для совместного инвестирования, обмена экспертизой и доступа к лучшим AI‑стартапам региона.</p>
             </div>
         </section>
 
-        <!-- Slide 4: Key Problems -->
+        <!-- Slide 4: Наши достижения -->
         <section class="slide" id="slide-3">
             <div class="slide-content">
-                <h2 class="slide-title">Ключевые проблемы</h2>
-                <div class="problems-grid">
-                    <div class="problem-card">
-                        <div class="problem-category">Ресурсы</div>
-                        <div class="problem-title">Нехватка команды</div>
-                        <div class="problem-desc">2 разработчика на 7 модулей, отсутствие UX/UI дизайнера</div>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-category">Процессы</div>
-                        <div class="problem-title">Хаотичная разработка</div>
-                        <div class="problem-desc">Нет бэклога, системы приоритизации, редкие встречи с бизнесом</div>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-category">Технические</div>
-                        <div class="problem-title">Технический долг</div>
-                        <div class="problem-desc">Накопленный legacy код</div>
-                    </div>
-                    <div class="problem-card">
-                        <div class="problem-category">Стратегия</div>
-                        <div class="problem-title">Неясная монетизация</div>
-                        <div class="problem-desc">Отсутствие четкого плана коммерциализации и привлечения инвестиций</div>
-                    </div>
-                </div>
+                <h2 class="slide-title">Наши достижения</h2>
+                <p><strong>Проведенные хакатоны:</strong></p>
+                <ul>
+                    <li>Февраль 2025 – "AI для бизнеса" (150+ участников, 36 команд)</li>
+                    <li>Май 2025 – отраслевой хакатон UZBEKNEFTEGAZ</li>
+                </ul>
+                <p><strong>Партнерская сеть:</strong> 20+ инвестиционных фондов и корпоративные партнеры</p>
             </div>
         </section>
 
-        <!-- Slide 5: Focus Change -->
+        <!-- Slide 5: Экосистема -->
         <section class="slide" id="slide-4">
             <div class="slide-content">
-                <h2 class="slide-title">Смена фокуса разработки</h2>
-                <div class="change-content">
-                    <div class="change-subtitle">От полного образа к доработке существующего</div>
-                    <div class="change-points">
-                        <div class="point-item">
-                            <i data-lucide="target"></i>
-                            <span>Концентрация на улучшении текущих модулей</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="trending-up"></i>
-                            <span>Подготовка к получению инвестиций как стартап</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="zap"></i>
-                            <span>Фокус на MVP для внешних клиентов</span>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="slide-title">Экосистема Angel Connect</h2>
+                <ol>
+                    <li>Хакатоны – генерация идей</li>
+                    <li>Инкубатор/Акселератор – развитие стартапов</li>
+                    <li>Клуб инвесторов – финансирование и менторство</li>
+                    <li>Масштабирование – выход на новые рынки</li>
+                </ol>
             </div>
         </section>
 
-        <!-- Slide 6: Processes -->
+        <!-- Slide 6: Наша команда -->
         <section class="slide" id="slide-5">
             <div class="slide-content">
-                <h2 class="slide-title">Улучшение процессов команды</h2>
-                <div class="change-content">
-                    <div class="change-subtitle">Переход с Trello на Notion</div>
-                    <div class="change-points">
-                        <div class="point-item">
-                            <i data-lucide="list"></i>
-                            <span>Создание структурированного бэклога</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="file-text"></i>
-                            <span>Написание ТЗ для задач</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="refresh-ccw"></i>
-                            <span>Внедрение Scrum/Kanban методологии</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="calendar-check"></i>
-                            <span>Регулярные спринты и ретроспективы</span>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="slide-title">Наша команда</h2>
+                <p><strong>Артем Стрельченок</strong> – Co-Founder & CEO Sogda Digital, 15+ лет в инвестициях и Data‑проектах</p>
+                <p><strong>Виталий Тарасюк</strong> – Основатель PRO Business Club, 12+ лет опыта</p>
+                <p><strong>Артем Панферов</strong> – Основатель AI LAB & EndCode Studio, 10+ лет Product Owner</p>
+                <p><strong>Сирожиддин Аслонов</strong> – Топ-менеджер стартапов, ключевой участник экосистемы Узбекистана</p>
             </div>
         </section>
 
-        <!-- Slide 7: AI in Processes -->
+        <!-- Slide 7: Преимущества -->
         <section class="slide" id="slide-6">
             <div class="slide-content">
-                <h2 class="slide-title">Внедрение AI в процессы</h2>
-                <div class="change-content">
-                    <div class="change-subtitle">Для менеджеров и разработчиков</div>
-                    <div class="change-points">
-                        <div class="point-item">
-                            <i data-lucide="code"></i>
-                            <span>Cursor IDE для ускорения разработки</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="cpu"></i>
-                            <span>Claude code как агент разработчик</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="palette"></i>
-                            <span>AI-генерация UI/UX макетов</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="zap"></i>
-                            <span>Ожидаемое ускорение на 70-80%</span>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="slide-title">Преимущества участия</h2>
+                <ul>
+                    <li>Эксклюзивный доступ к проверенным стартапам</li>
+                    <li>Коллективный due diligence и снижение рисков</li>
+                    <li>Менторская поддержка портфельных компаний</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Slide 8: AI in Product -->
+        <!-- Slide 8: Формат работы -->
         <section class="slide" id="slide-7">
             <div class="slide-content">
-                <h2 class="slide-title">Интеграция AI в продукт</h2>
-                <div class="change-content">
-                    <div class="change-subtitle">Простые, но полезные функции</div>
-                    <div class="change-points">
-                        <div class="point-item">
-                            <i data-lucide="bar-chart-3"></i>
-                            <span>ChatGPT API для аналитики</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="robot"></i>
-                            <span>Автоматизация рутинных задач</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="lightbulb"></i>
-                            <span>Умные рекомендации для пользователей</span>
-                        </div>
-                        <div class="point-item">
-                            <i data-lucide="arrow-up-right"></i>
-                            <span>Повышение ценности продукта</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="back-to-top">
-                    <button class="btn-back-to-top" onclick="scrollToTop()">
-                        <i data-lucide="arrow-up"></i>
-                        Вернуться к началу
-                    </button>
-                </div>
+                <h2 class="slide-title">Формат работы клуба</h2>
+                <ul>
+                    <li>Ежемесячные pitch‑сессии стартапов</li>
+                    <li>Квартальные стратегические встречи</li>
+                    <li>Синдицированные сделки от $5K до $50K+</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 9: Партнеры -->
+        <section class="slide" id="slide-8">
+            <div class="slide-content">
+                <h2 class="slide-title">Наши партнеры</h2>
+                <p>Инвестиционные фонды: United Ventures, AloqaVentures, Zubr Capital и другие.</p>
+                <p>Корпоративные партнеры: UZBEKNEFTEGAZ, IT Park Uzbekistan, AI LAB, ProBusiness Club.</p>
+            </div>
+        </section>
+
+        <!-- Slide 10: Планы развития -->
+        <section class="slide" id="slide-9">
+            <div class="slide-content">
+                <h2 class="slide-title">Планы развития</h2>
+                <p><strong>До конца 2025:</strong> запуск инкубатора, два дополнительных хакатона, формирование фонда Angel Connect.</p>
+                <p><strong>2026 и далее:</strong> экспансия в Казахстан и Киргизию, партнерства с международными акселераторами.</p>
+            </div>
+        </section>
+
+        <!-- Slide 11: Инвестиционные возможности -->
+        <section class="slide" id="slide-10">
+            <div class="slide-content">
+                <h2 class="slide-title">Инвестиционные возможности</h2>
+                <p>Текущие проекты включают AI‑решения для бизнеса, нефтегаза, финтех и оптимизации производства.</p>
+            </div>
+        </section>
+
+        <!-- Slide 12: Условия участия -->
+        <section class="slide" id="slide-11">
+            <div class="slide-content">
+                <h2 class="slide-title">Условия участия</h2>
+                <ul>
+                    <li>Готовность к активному участию в жизни клуба</li>
+                    <li>Минимальный годовой инвестиционный потенциал</li>
+                    <li>Вовлеченность в менторство портфельных компаний</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 13: Следующие шаги -->
+        <section class="slide" id="slide-12">
+            <div class="slide-content">
+                <h2 class="slide-title">Следующие шаги</h2>
+                <ol>
+                    <li>Индивидуальная встреча с основателями</li>
+                    <li>Знакомство с портфелем проектов</li>
+                    <li>Участие в пробной pitch‑сессии</li>
+                    <li>Финализация условий членства</li>
+                </ol>
+                <p>Контакты: hello@angelconnect.uz, Telegram: @angelconnect_uz</p>
+            </div>
+        </section>
+
+        <!-- Slide 14: Призыв -->
+        <section class="slide" id="slide-13">
+            <div class="slide-content">
+                <h2 class="slide-title">Время создавать будущее вместе</h2>
+                <p>"Мы строим не просто инвестиционный клуб — мы создаем экосистему, которая изменит технологический landscape Центральной Азии"</p>
+                <p><strong>Присоединяйтесь к Angel Connect</strong></p>
             </div>
         </section>
     </main>
