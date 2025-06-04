@@ -17,15 +17,24 @@ function initBackground3D() {
     container.appendChild(renderer.domElement);
 
     const objects = [];
-    const geometry = new THREE.SphereGeometry(1, 16, 16);
 
-    for (let i = 0; i < 20; i++) {
+    const geometries = [
+        new THREE.SphereGeometry(1, 16, 16),
+        new THREE.TorusGeometry(1, 0.4, 16, 32),
+        new THREE.BoxGeometry(1.4, 1.4, 1.4),
+        new THREE.ConeGeometry(1, 1.5, 4)
+    ];
+
+    for (let i = 0; i < 25; i++) {
         const glow = Math.random() > 0.7;
         const material = new THREE.MeshPhongMaterial({
-            color: 0x3498db,
+            color: 0x3399ff,
             emissive: glow ? 0x66aaff : 0x000000,
-            shininess: 50,
+            shininess: 80,
+            transparent: true,
+            opacity: 0.7
         });
+        const geometry = geometries[Math.floor(Math.random() * geometries.length)];
         const mesh = new THREE.Mesh(geometry, material);
         mesh.position.set((Math.random() - 0.5) * 60, (Math.random() - 0.5) * 60, (Math.random() - 0.5) * 60);
         mesh.userData.velocity = new THREE.Vector3((Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1);
@@ -33,9 +42,10 @@ function initBackground3D() {
         objects.push(mesh);
     }
 
-    const light = new THREE.PointLight(0xffffff, 1);
-    light.position.set(0, 0, 60);
-    scene.add(light);
+    const pointLight = new THREE.PointLight(0xffffff, 1);
+    pointLight.position.set(0, 0, 60);
+    scene.add(pointLight);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
 
     function animate() {
         requestAnimationFrame(animate);
