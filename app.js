@@ -73,14 +73,8 @@ function initPresentation() {
 // Handle scroll events - только для определения текущего слайда
 function handleScroll() {
     const scrollTop = presentation.scrollTop;
-    const slideHeight = window.innerHeight;
-    const newSlide = Math.round(scrollTop / slideHeight);
-    
-    if (newSlide !== currentSlide && newSlide >= 0 && newSlide < slides.length) {
-        updateActiveSlide(newSlide);
-    }
-    
-    // Update progress bar
+
+    // Update progress bar only. Active slide will be handled by IntersectionObserver.
     const progress = (scrollTop / (presentation.scrollHeight - window.innerHeight)) * 100;
     progressFill.style.width = Math.min(Math.max(progress, 0), 100) + '%';
 }
@@ -156,13 +150,20 @@ function setupIntersectionObserver() {
     const observerOptions = {
         root: presentation,
         rootMargin: '0px',
-        threshold: 0.3
+        // Use a higher threshold so the slide becomes active when
+        // most of it is visible, reducing flicker between slides
+        threshold: 0.6
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+                // Determine index of the intersecting slide and mark it active
+                const index = Array.from(slides).indexOf(entry.target);
+                if (index !== -1) {
+                    updateActiveSlide(index);
+                }
+
                 animateSlideContent(entry.target);
             }
         });
