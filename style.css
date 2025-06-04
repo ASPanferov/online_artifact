@@ -1149,11 +1149,18 @@ body {
         padding: 1rem;
     }
 
+    .timeline {
+        padding-left: 2rem;
+    }
+
+    .timeline-item {
+        padding-left: 2rem;
+    }
+
     .timeline-item:nth-child(odd) .timeline-content,
     .timeline-item:nth-child(even) .timeline-content {
         text-align: left;
-        margin-left: 2rem;
-        margin-right: 0;
+        margin: 0;
         order: unset;
     }
 
