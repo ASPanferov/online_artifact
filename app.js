@@ -151,10 +151,12 @@ function handleKeydown(event) {
 
 // Set up intersection observer for slide animations
 function setupIntersectionObserver() {
+    // Use the scrolling container as the root so that
+    // slides become active reliably while scrolling
     const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -20% 0px',
-        threshold: 0.1
+        root: presentation,
+        rootMargin: '0px',
+        threshold: 0.3
     };
     
     const observer = new IntersectionObserver((entries) => {
