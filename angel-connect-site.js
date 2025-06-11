@@ -61,14 +61,13 @@ function initNavigation() {
 }
 
 /**
- * Mobile menu functionality
+ * Enhanced Mobile menu functionality
  */
 function initMobileMenu() {
     const toggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const navActions = document.querySelector('.nav-actions');
+    const mobileNav = document.querySelector('.mobile-nav');
     
-    if (!toggle) return;
+    if (!toggle || !mobileNav) return;
     
     toggle.addEventListener('click', function() {
         const isOpen = toggle.classList.contains('open');
@@ -80,42 +79,52 @@ function initMobileMenu() {
         }
     });
     
+    // Close menu when clicking on links
+    mobileNav.querySelectorAll('.mobile-nav-link, .btn').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Close menu on outside click
+    document.addEventListener('click', function(e) {
+        if (!toggle.contains(e.target) && !mobileNav.contains(e.target) && mobileNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+    
     function openMobileMenu() {
         toggle.classList.add('open');
-        
-        // Create mobile menu if it doesn't exist
-        let mobileMenu = document.querySelector('.mobile-menu');
-        if (!mobileMenu) {
-            mobileMenu = document.createElement('div');
-            mobileMenu.className = 'mobile-menu';
-            mobileMenu.innerHTML = `
-                <div class="mobile-menu-content">
-                    ${navLinks.innerHTML}
-                    <div class="mobile-actions">
-                        ${navActions.innerHTML}
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(mobileMenu);
-        }
-        
-        mobileMenu.classList.add('active');
+        mobileNav.classList.add('active');
         document.body.style.overflow = 'hidden';
         
-        // Add click listeners to mobile menu links
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
+        // Focus management for accessibility
+        const firstLink = mobileNav.querySelector('.mobile-nav-link');
+        if (firstLink) {
+            setTimeout(() => firstLink.focus(), 100);
+        }
     }
     
     function closeMobileMenu() {
         toggle.classList.remove('open');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        if (mobileMenu) {
-            mobileMenu.classList.remove('active');
-        }
+        mobileNav.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Return focus to toggle button
+        toggle.focus();
     }
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && mobileNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
 }
 
 /**
