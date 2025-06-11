@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initCounterAnimations();
     initFormHandling();
     initCursorFollower();
+    initClickGlow();
+    initRockToggle();
     
     console.log('Angel Connect website initialized ✨');
 });
@@ -766,66 +768,198 @@ const dynamicStyles = `
 document.head.insertAdjacentHTML('beforeend', dynamicStyles);
 
 /**
- * Cursor follower functionality
+ * Flying rock physics
  */
 function initCursorFollower() {
     const follower = document.getElementById('cursorFollower');
     if (!follower) return;
     
-    let mouseX = 0;
-    let mouseY = 0;
-    let followerX = 0;
-    let followerY = 0;
+    // Rock physics properties
+    let rockX = window.innerWidth / 2;
+    let rockY = window.innerHeight / 2;
+    let velocityX = (Math.random() - 0.5) * 2; // Random initial direction
+    let velocityY = (Math.random() - 0.5) * 2;
+    let gravityX = 0;
+    let gravityY = 0;
+    const speed = 1.5; // Base speed
+    const bounceDecay = 0.8; // Energy loss on bounce
+    const gravityStrength = 0.02; // How strong the gravity effect is
+    const gravityDecay = 0.98; // How gravity fades over time
+    const rockSize = 650; // Rock size for collision detection
     
-    // Update mouse position
-    document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+    // Normalize initial velocity
+    const initialMagnitude = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+    velocityX = (velocityX / initialMagnitude) * speed;
+    velocityY = (velocityY / initialMagnitude) * speed;
+    
+    // Handle mouse clicks for gravity
+    document.addEventListener('click', function(e) {
+        // Ignore clicks on interactive elements
+        if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+            return;
+        }
+        
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        
+        // Calculate gravity direction towards click
+        const deltaX = mouseX - rockX;
+        const deltaY = mouseY - rockY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        
+        if (distance > 0) {
+            // Set gravity towards click point
+            gravityX = (deltaX / distance) * gravityStrength;
+            gravityY = (deltaY / distance) * gravityStrength;
+        }
     });
     
-    // Smooth animation function
-    function animateFollower() {
-        // Calculate the distance to move (easing)
-        const deltaX = mouseX - followerX;
-        const deltaY = mouseY - followerY;
+    // Animation function
+    function animateRock() {
+        // Apply gravity
+        velocityX += gravityX;
+        velocityY += gravityY;
         
-        // Move 10% of the distance each frame for smooth following
-        followerX += deltaX * 0.1;
-        followerY += deltaY * 0.1;
+        // Decay gravity over time
+        gravityX *= gravityDecay;
+        gravityY *= gravityDecay;
         
-        // Apply position with offset to center the element
-        follower.style.left = (followerX - follower.offsetWidth / 2) + 'px';
-        follower.style.top = (followerY - follower.offsetHeight / 2) + 'px';
+        // Normalize velocity to maintain consistent speed
+        const currentMagnitude = Math.sqrt(velocityX * velocityX + velocityY * velocityY);
+        if (currentMagnitude > 0) {
+            velocityX = (velocityX / currentMagnitude) * speed;
+            velocityY = (velocityY / currentMagnitude) * speed;
+        }
         
-        // Add slight rotation based on movement direction
-        const rotation = Math.atan2(deltaY, deltaX) * (180 / Math.PI) * 0.1;
-        follower.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+        // Update position
+        rockX += velocityX;
+        rockY += velocityY;
         
-        requestAnimationFrame(animateFollower);
+        // Collision detection with screen edges
+        const halfSize = rockSize / 2;
+        
+        // Left edge collision
+        if (rockX - halfSize <= 0) {
+            rockX = halfSize;
+            velocityX = Math.abs(velocityX) * bounceDecay;
+        }
+        
+        // Right edge collision
+        if (rockX + halfSize >= window.innerWidth) {
+            rockX = window.innerWidth - halfSize;
+            velocityX = -Math.abs(velocityX) * bounceDecay;
+        }
+        
+        // Top edge collision
+        if (rockY - halfSize <= 0) {
+            rockY = halfSize;
+            velocityY = Math.abs(velocityY) * bounceDecay;
+        }
+        
+        // Bottom edge collision
+        if (rockY + halfSize >= window.innerHeight) {
+            rockY = window.innerHeight - halfSize;
+            velocityY = -Math.abs(velocityY) * bounceDecay;
+        }
+        
+        // Apply position
+        follower.style.left = (rockX - halfSize) + 'px';
+        follower.style.top = (rockY - halfSize) + 'px';
+        
+        requestAnimationFrame(animateRock);
     }
     
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        // Keep rock within new boundaries
+        const halfSize = rockSize / 2;
+        rockX = Math.max(halfSize, Math.min(window.innerWidth - halfSize, rockX));
+        rockY = Math.max(halfSize, Math.min(window.innerHeight - halfSize, rockY));
+    });
+    
     // Start animation
-    animateFollower();
+    animateRock();
+}
+
+/**
+ * Click glow effect for Angel Connect title
+ */
+function initClickGlow() {
+    const titleElement = document.querySelector('.hero-title-main');
+    if (!titleElement) return;
     
-    // Show/hide follower based on mouse activity
-    let hideTimeout;
+    // Set data-text attribute for the pseudo-element
+    titleElement.setAttribute('data-text', titleElement.textContent);
     
-    document.addEventListener('mousemove', function() {
-        follower.style.opacity = '0.7';
+    let clickCooldown = false;
+    
+    document.addEventListener('click', function(e) {
+        // Ignore clicks on interactive elements
+        if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+            return;
+        }
         
-        clearTimeout(hideTimeout);
-        hideTimeout = setTimeout(() => {
-            follower.style.opacity = '0.3';
+        // Check cooldown
+        if (clickCooldown) return;
+        
+        // Activate cooldown
+        clickCooldown = true;
+        
+        // Add glowing effect
+        titleElement.classList.add('glowing');
+        
+        // Remove effect after animation completes (2 seconds)
+        setTimeout(() => {
+            titleElement.classList.remove('glowing');
         }, 2000);
+        
+        // Reset cooldown after 1.5 seconds to prevent spam
+        setTimeout(() => {
+            clickCooldown = false;
+        }, 1500);
+    });
+}
+
+/**
+ * Rock toggle functionality
+ */
+function initRockToggle() {
+    const toggle = document.getElementById('rockToggle');
+    const follower = document.getElementById('cursorFollower');
+    
+    if (!toggle || !follower) return;
+    
+    // Load saved state from localStorage
+    const savedState = localStorage.getItem('rockFollowerEnabled');
+    const isEnabled = savedState !== null ? savedState === 'true' : true; // По умолчанию включен
+    
+    toggle.checked = isEnabled;
+    updateRockVisibility(isEnabled);
+    
+    // Handle toggle change
+    toggle.addEventListener('change', function() {
+        const enabled = this.checked;
+        updateRockVisibility(enabled);
+        
+        // Save state to localStorage
+        localStorage.setItem('rockFollowerEnabled', enabled.toString());
+        
+        // Visual feedback
+        const container = this.closest('.rock-toggle-container');
+        container.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            container.style.transform = 'scale(1)';
+        }, 150);
     });
     
-    document.addEventListener('mouseleave', function() {
-        follower.style.opacity = '0.2';
-    });
-    
-    document.addEventListener('mouseenter', function() {
-        follower.style.opacity = '0.7';
-    });
+    function updateRockVisibility(enabled) {
+        if (enabled) {
+            follower.style.display = 'block';
+            follower.style.opacity = '0.7';
+        } else {
+            follower.style.display = 'none';
+        }
+    }
 }
 
 // Export functions for potential external use
