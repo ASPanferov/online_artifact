@@ -134,6 +134,29 @@ function initCompanyFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const companyCards = document.querySelectorAll('.company-card');
     
+    // Set AI filter as active by default
+    const aiFilter = document.querySelector('.filter-btn[data-filter="ai"]');
+    const allFilter = document.querySelector('.filter-btn[data-filter="all"]');
+    
+    if (aiFilter && allFilter) {
+        allFilter.classList.remove('active');
+        aiFilter.classList.add('active');
+        
+        // Show only AI companies initially
+        companyCards.forEach(card => {
+            const category = card.dataset.category;
+            if (category === 'ai') {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            } else {
+                card.style.display = 'none';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.8)';
+            }
+        });
+    }
+    
     filterBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const filter = this.dataset.filter;
