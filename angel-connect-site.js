@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initCounterAnimations();
     initFormHandling();
+    initCursorFollower();
     
     console.log('Angel Connect website initialized ✨');
 });
@@ -763,6 +764,69 @@ const dynamicStyles = `
 
 // Inject dynamic styles
 document.head.insertAdjacentHTML('beforeend', dynamicStyles);
+
+/**
+ * Cursor follower functionality
+ */
+function initCursorFollower() {
+    const follower = document.getElementById('cursorFollower');
+    if (!follower) return;
+    
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
+    
+    // Update mouse position
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    // Smooth animation function
+    function animateFollower() {
+        // Calculate the distance to move (easing)
+        const deltaX = mouseX - followerX;
+        const deltaY = mouseY - followerY;
+        
+        // Move 10% of the distance each frame for smooth following
+        followerX += deltaX * 0.1;
+        followerY += deltaY * 0.1;
+        
+        // Apply position with offset to center the element
+        follower.style.left = (followerX - follower.offsetWidth / 2) + 'px';
+        follower.style.top = (followerY - follower.offsetHeight / 2) + 'px';
+        
+        // Add slight rotation based on movement direction
+        const rotation = Math.atan2(deltaY, deltaX) * (180 / Math.PI) * 0.1;
+        follower.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+        
+        requestAnimationFrame(animateFollower);
+    }
+    
+    // Start animation
+    animateFollower();
+    
+    // Show/hide follower based on mouse activity
+    let hideTimeout;
+    
+    document.addEventListener('mousemove', function() {
+        follower.style.opacity = '0.7';
+        
+        clearTimeout(hideTimeout);
+        hideTimeout = setTimeout(() => {
+            follower.style.opacity = '0.3';
+        }, 2000);
+    });
+    
+    document.addEventListener('mouseleave', function() {
+        follower.style.opacity = '0.2';
+    });
+    
+    document.addEventListener('mouseenter', function() {
+        follower.style.opacity = '0.7';
+    });
+}
 
 // Export functions for potential external use
 window.AngelConnect = {
