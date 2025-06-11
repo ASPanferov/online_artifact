@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Connect - Презентация</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide icons with fallback -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        if (typeof lucide === 'undefined') {
+            const fallbackScript = document.createElement('script');
+            fallbackScript.src = 'https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js';
+            document.head.appendChild(fallbackScript);
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+    <div id="three-container"></div>
+    <!-- Navigation Dots -->
+    <nav class="nav-dots">
+        <div class="nav-dot active" data-slide="0"></div>
+        <div class="nav-dot" data-slide="1"></div>
+        <div class="nav-dot" data-slide="2"></div>
+        <div class="nav-dot" data-slide="3"></div>
+        <div class="nav-dot" data-slide="4"></div>
+        <div class="nav-dot" data-slide="5"></div>
+        <div class="nav-dot" data-slide="6"></div>
+        <div class="nav-dot" data-slide="7"></div>
+        <div class="nav-dot" data-slide="8"></div>
+        <div class="nav-dot" data-slide="9"></div>
+        <div class="nav-dot" data-slide="10"></div>
+        <div class="nav-dot" data-slide="11"></div>
+        <div class="nav-dot" data-slide="12"></div>
+        <div class="nav-dot" data-slide="13"></div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+
+    <main class="presentation">
+        <!-- Slide 1: Title -->
+        <section class="slide hero-slide active" id="slide-0">
+            <div class="slide-content">
+                <div class="hero-content">
+                    <h1 class="hero-title">Angel Connect</h1>
+                    <p class="hero-subtitle">Закрытый клуб ангел-инвесторов для развития AI-стартапов в Центральной Азии</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Проблема -->
+        <section class="slide problem-slide" id="slide-1">
+            <div class="slide-content">
+                <h2 class="slide-title">Проблема</h2>
+                <ul>
+                    <li class="bullet-item">Стартапы не находят "умные деньги" с отраслевой экспертизой</li>
+                    <li class="bullet-item">Инвесторы работают в одиночку, упуская синергию</li>
+                    <li class="bullet-item">Отсутствует качественная воронка проверенных проектов</li>
+                    <li class="bullet-item">Нет системного подхода к развитию региональной экосистемы</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 3: Наше решение -->
+        <section class="slide solution-slide" id="slide-2">
+            <div class="slide-content">
+                <h2 class="slide-title">Наше решение</h2>
+                <p>Angel Connect объединяет ангел-инвесторов для совместного инвестирования, обмена экспертизой и доступа к лучшим AI‑стартапам региона.</p>
+            </div>
+        </section>
+
+        <!-- Slide 4: Наши достижения -->
+        <section class="slide" id="slide-3">
+            <div class="slide-content">
+                <h2 class="slide-title">Наши достижения</h2>
+                <p><strong>Проведенные хакатоны:</strong></p>
+                <ul>
+                    <li>Февраль 2025 – "AI для бизнеса" (150+ участников, 36 команд)</li>
+                    <li>Май 2025 – отраслевой хакатон UZBEKNEFTEGAZ</li>
+                </ul>
+                <p><strong>Партнерская сеть:</strong> 20+ инвестиционных фондов и корпоративные партнеры</p>
+            </div>
+        </section>
+
+        <!-- Slide 5: Экосистема -->
+        <section class="slide" id="slide-4">
+            <div class="slide-content">
+                <h2 class="slide-title">Экосистема Angel Connect</h2>
+                <ol>
+                    <li>Хакатоны – генерация идей</li>
+                    <li>Инкубатор/Акселератор – развитие стартапов</li>
+                    <li>Клуб инвесторов – финансирование и менторство</li>
+                    <li>Масштабирование – выход на новые рынки</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Slide 6: Наша команда -->
+        <section class="slide" id="slide-5">
+            <div class="slide-content">
+                <h2 class="slide-title">Наша команда</h2>
+                <p><strong>Артем Стрельченок</strong> – Co-Founder & CEO Sogda Digital, 15+ лет в инвестициях и Data‑проектах</p>
+                <p><strong>Виталий Тарасюк</strong> – Основатель PRO Business Club, 12+ лет опыта</p>
+                <p><strong>Артем Панферов</strong> – Основатель AI LAB & EndCode Studio, 10+ лет Product Owner</p>
+                <p><strong>Сирожиддин Аслонов</strong> – Топ-менеджер стартапов, ключевой участник экосистемы Узбекистана</p>
+            </div>
+        </section>
+
+        <!-- Slide 7: Преимущества -->
+        <section class="slide" id="slide-6">
+            <div class="slide-content">
+                <h2 class="slide-title">Преимущества участия</h2>
+                <ul>
+                    <li>Эксклюзивный доступ к проверенным стартапам</li>
+                    <li>Коллективный due diligence и снижение рисков</li>
+                    <li>Менторская поддержка портфельных компаний</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 8: Формат работы -->
+        <section class="slide" id="slide-7">
+            <div class="slide-content">
+                <h2 class="slide-title">Формат работы клуба</h2>
+                <ul>
+                    <li>Ежемесячные pitch‑сессии стартапов</li>
+                    <li>Квартальные стратегические встречи</li>
+                    <li>Синдицированные сделки от $5K до $50K+</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 9: Партнеры -->
+        <section class="slide" id="slide-8">
+            <div class="slide-content">
+                <h2 class="slide-title">Наши партнеры</h2>
+                <p>Инвестиционные фонды: United Ventures, AloqaVentures, Zubr Capital и другие.</p>
+                <p>Корпоративные партнеры: UZBEKNEFTEGAZ, IT Park Uzbekistan, AI LAB, ProBusiness Club.</p>
+            </div>
+        </section>
+
+        <!-- Slide 10: Планы развития -->
+        <section class="slide" id="slide-9">
+            <div class="slide-content">
+                <h2 class="slide-title">Планы развития</h2>
+                <p><strong>До конца 2025:</strong> запуск инкубатора, два дополнительных хакатона, формирование фонда Angel Connect.</p>
+                <p><strong>2026 и далее:</strong> экспансия в Казахстан и Киргизию, партнерства с международными акселераторами.</p>
+            </div>
+        </section>
+
+        <!-- Slide 11: Инвестиционные возможности -->
+        <section class="slide" id="slide-10">
+            <div class="slide-content">
+                <h2 class="slide-title">Инвестиционные возможности</h2>
+                <p>Текущие проекты включают AI‑решения для бизнеса, нефтегаза, финтех и оптимизации производства.</p>
+            </div>
+        </section>
+
+        <!-- Slide 12: Условия участия -->
+        <section class="slide" id="slide-11">
+            <div class="slide-content">
+                <h2 class="slide-title">Условия участия</h2>
+                <ul>
+                    <li>Готовность к активному участию в жизни клуба</li>
+                    <li>Минимальный годовой инвестиционный потенциал</li>
+                    <li>Вовлеченность в менторство портфельных компаний</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 13: Следующие шаги -->
+        <section class="slide" id="slide-12">
+            <div class="slide-content">
+                <h2 class="slide-title">Следующие шаги</h2>
+                <ol>
+                    <li>Индивидуальная встреча с основателями</li>
+                    <li>Знакомство с портфелем проектов</li>
+                    <li>Участие в пробной pitch‑сессии</li>
+                    <li>Финализация условий членства</li>
+                </ol>
+                <p>Контакты: hello@angelconnect.uz, Telegram: @angelconnect_uz</p>
+            </div>
+        </section>
+
+        <!-- Slide 14: Призыв -->
+        <section class="slide" id="slide-13">
+            <div class="slide-content">
+                <h2 class="slide-title">Время создавать будущее вместе</h2>
+                <p>"Мы строим не просто инвестиционный клуб — мы создаем экосистему, которая изменит технологический landscape Центральной Азии"</p>
+                <p><strong>Присоединяйтесь к Angel Connect</strong></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script type="module" src="background.js"></script>
+</body>
+</html>

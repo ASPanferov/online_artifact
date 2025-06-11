@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+*.tmp
+*.temp
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (если будут добавлены в будущем)
+node_modules/
+vendor/
+
+# Build files
+dist/
+build/
+
+# Archive files
+*.zip
+*.rar
+*.tar.gz 
