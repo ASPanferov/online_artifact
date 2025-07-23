@@ -1,0 +1,75 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Public read access for most content
+    match /startups/{startupId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    match /team/{memberId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    match /events/{eventId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    match /blog/{postId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    match /partners/{partnerId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    match /mentors/{mentorId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+    
+    // Protected storage for investors
+    match /investors/{investorId}/{allPaths=**} {
+      allow read: if request.auth != null && 
+        (request.auth.uid == investorId || request.auth.token.admin == true);
+      allow write: if request.auth != null && 
+        (request.auth.uid == investorId || request.auth.token.admin == true);
+    }
+    
+    // Temporary uploads folder
+    match /uploads/temp/{allPaths=**} {
+      allow read, write: if true;
+      // Files in temp folder should be cleaned up by Cloud Functions
+    }
+    
+    // Application documents
+    match /applications/{applicationId}/{allPaths=**} {
+      allow read: if request.auth != null && request.auth.token.admin == true;
+      allow write: if true; // Allow uploads during application process
+    }
+
+    // Helper function to check file size (max 10MB)
+    function isValidFileSize() {
+      return request.resource.size < 10 * 1024 * 1024;
+    }
+
+    // Helper function to check if file type is allowed
+    function isValidImageType() {
+      return request.resource.contentType.matches('image/.*');
+    }
+
+    function isValidDocumentType() {
+      return request.resource.contentType in [
+        'application/pdf',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ];
+    }
+  }
+}

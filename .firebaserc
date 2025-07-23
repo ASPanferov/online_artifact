@@ -1,0 +1,19 @@
+{
+  "projects": {},
+  "targets": {
+    "angelconnect-49d81": {
+      "hosting": {
+        "main": [
+          "angelconnect-49d81"
+        ],
+        "crm": [
+          "angelconnect-crm"
+        ],
+        "angelconnect-uz": [
+          "angelconnect-uz"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

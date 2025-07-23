@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Хакатон в Самарканде - 6-8 августа 2025 | Angel Connect</title>
+    <meta name="description" content="Примите участие в первом AI Хакатоне в Самарканде! 3 дня разработки, ноутбуки в качестве призов, менторство от экспертов Angel Connect. Регистрация до 15 июля.">
+    <meta name="keywords" content="AI хакатон, Самарканд, машинное обучение, искусственный интеллект, Angel Connect, IT, программирование">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Хакатон в Самарканде - 6-8 августа 2025">
+    <meta property="og:description" content="Первый AI Хакатон в Самарканде от Angel Connect. Призовой фонд, менторство, 3 дня интенсивной разработки.">
+    <meta property="og:type" content="event">
+    <meta property="og:locale" content="ru_RU">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Chart.js for prize visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Day.js for countdown -->
+    <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.11.10/plugin/duration.js"></script>
+    <script src="https://unpkg.com/dayjs@1.11.10/plugin/relativeTime.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="hackathon-styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-header" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">
+                    <div class="logo-icon">🤖</div>
+                    <span class="logo-text">AI Хакатон</span>
+                </a>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#about" class="nav-link" data-translate="nav.about">О хакатоне</a>
+                <a href="#prizes" class="nav-link" data-translate="nav.prizes">Призы</a>
+                <a href="#schedule" class="nav-link" data-translate="nav.schedule">Расписание</a>
+                <a href="#locations" class="nav-link" data-translate="nav.locations">Локации</a>
+                <a href="#faq" class="nav-link" data-translate="nav.faq">FAQ</a>
+            </div>
+            
+            <div class="nav-actions">
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="language-btn" id="languageBtn">
+                        <i data-lucide="globe" class="language-icon"></i>
+                        <span class="current-lang">RU</span>
+                        <i data-lucide="chevron-down" class="dropdown-icon"></i>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <button class="lang-option active" data-lang="ru">
+                            <span class="lang-flag">🇷🇺</span>
+                            <span class="lang-name">Русский</span>
+                        </button>
+                        <button class="lang-option" data-lang="uz">
+                            <span class="lang-flag">🇺🇿</span>
+                            <span class="lang-name">O'zbek</span>
+                        </button>
+                        <button class="lang-option" data-lang="en">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <a href="#register" class="btn btn-primary" data-translate="nav.register">Регистрация</a>
+            </div>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-links">
+            <a href="#about" class="mobile-nav-link" data-translate="nav.about">О хакатоне</a>
+            <a href="#prizes" class="mobile-nav-link" data-translate="nav.prizes">Призы</a>
+            <a href="#schedule" class="mobile-nav-link" data-translate="nav.schedule">Расписание</a>
+            <a href="#locations" class="mobile-nav-link" data-translate="nav.locations">Локации</a>
+            <a href="#faq" class="mobile-nav-link" data-translate="nav.faq">FAQ</a>
+            <a href="#register" class="mobile-nav-link mobile-nav-cta" data-translate="nav.register">Регистрация</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div id="particles-js" class="particles-background"></div>
+        <div class="hero-content">
+            <div class="hero-container">
+                <div class="hero-text" data-aos="fade-up">
+                    <h1 class="hero-title" data-translate="hero.title">
+                        AI ХАКАТОН
+                        <span class="gradient-text">САМАРКАНД</span>
+                    </h1>
+                    <p class="hero-subtitle" data-translate="hero.subtitle">
+                        Первый хакатон по искусственному интеллекту в древнем городе инноваций
+                    </p>
+                    <div class="hero-details">
+                        <div class="detail-item">
+                            <i data-lucide="calendar" class="detail-icon"></i>
+                            <span data-translate="hero.dates">6-8 августа 2025</span>
+                        </div>
+                        <div class="detail-item">
+                            <i data-lucide="map-pin" class="detail-icon"></i>
+                            <span data-translate="hero.location">School 21 + Hilton Samarkand</span>
+                        </div>
+                        <div class="detail-item">
+                            <i data-lucide="users" class="detail-icon"></i>
+                            <span data-translate="hero.participants">До 100 участников</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Countdown Timers -->
+                <div class="countdown-section" data-aos="fade-up" data-aos-delay="200">
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <h3 class="countdown-title" data-translate="countdown.registration">До окончания регистрации</h3>
+                            <div class="countdown-timer" id="registrationCountdown">
+                                <div class="time-unit">
+                                    <span class="time-value" id="regDays">--</span>
+                                    <span class="time-label" data-translate="time.days">дней</span>
+                                </div>
+                                <div class="time-unit">
+                                    <span class="time-value" id="regHours">--</span>
+                                    <span class="time-label" data-translate="time.hours">часов</span>
+                                </div>
+                                <div class="time-unit">
+                                    <span class="time-value" id="regMinutes">--</span>
+                                    <span class="time-label" data-translate="time.minutes">минут</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="countdown-item">
+                            <h3 class="countdown-title" data-translate="countdown.event">До начала хакатона</h3>
+                            <div class="countdown-timer" id="eventCountdown">
+                                <div class="time-unit">
+                                    <span class="time-value" id="eventDays">--</span>
+                                    <span class="time-label" data-translate="time.days">дней</span>
+                                </div>
+                                <div class="time-unit">
+                                    <span class="time-value" id="eventHours">--</span>
+                                    <span class="time-label" data-translate="time.hours">часов</span>
+                                </div>
+                                <div class="time-unit">
+                                    <span class="time-value" id="eventMinutes">--</span>
+                                    <span class="time-label" data-translate="time.minutes">минут</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Actions -->
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
+                    <a href="#register" class="btn btn-primary btn-large">
+                        <i data-lucide="user-plus" class="btn-icon"></i>
+                        <span data-translate="hero.register">Подать заявку</span>
+                    </a>
+                    <a href="#about" class="btn btn-secondary btn-large">
+                        <i data-lucide="info" class="btn-icon"></i>
+                        <span data-translate="hero.learn_more">Узнать больше</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item" data-aos="fade-up">
+                <div class="stat-number">100</div>
+                <div class="stat-label" data-translate="stats.participants">Участников</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-number">3</div>
+                <div class="stat-label" data-translate="stats.days">Дня</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-number">6</div>
+                <div class="stat-label" data-translate="stats.mentors">Менторов</div>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-number">4-6</div>
+                <div class="stat-label" data-translate="stats.team_size">Человек в команде</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="about.title">О хакатоне</h2>
+                <p class="section-subtitle" data-translate="about.subtitle">
+                    Первый специализированный AI/ML хакатон в Центральной Азии
+                </p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-grid">
+                    <div class="about-text" data-aos="fade-right">
+                        <h3 data-translate="about.mission.title">Наша миссия</h3>
+                        <p data-translate="about.mission.description">
+                            Объединить талантливых разработчиков, дизайнеров и предпринимателей 
+                            для создания инновационных AI-решений, которые изменят будущее 
+                            Центральной Азии и мира.
+                        </p>
+                        
+                        <h3 data-translate="about.format.title">Формат мероприятия</h3>
+                        <p data-translate="about.format.description">
+                            3 дня интенсивной работы в команде, менторство от экспертов Angel Connect, 
+                            воркшопы по AI/ML технологиям и питчинг готовых прототипов перед жюри.
+                        </p>
+                    </div>
+                    
+                    <div class="about-features" data-aos="fade-left">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon">🤖</div>
+                                <h4 data-translate="features.ai_focus.title">Фокус на AI/ML</h4>
+                                <p data-translate="features.ai_focus.description">
+                                    Обязательное использование технологий искусственного интеллекта
+                                </p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">👥</div>
+                                <h4 data-translate="features.teams.title">Командная работа</h4>
+                                <p data-translate="features.teams.description">
+                                    Команды 4-6 человек с разными ролями и экспертизой
+                                </p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">🏆</div>
+                                <h4 data-translate="features.prizes.title">Ценные призы</h4>
+                                <p data-translate="features.prizes.description">
+                                    Ноутбуки, планшеты и смартфоны победителям
+                                </p>
+                            </div>
+                            
+                            <div class="feature-card">
+                                <div class="feature-icon">🎓</div>
+                                <h4 data-translate="features.mentorship.title">Менторство</h4>
+                                <p data-translate="features.mentorship.description">
+                                    Поддержка от экспертов Angel Connect и приглашенных менторов
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prizes Section -->
+    <section class="prizes-section" id="prizes">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="prizes.title">Призы и награды</h2>
+                <p class="section-subtitle" data-translate="prizes.subtitle">
+                    Ценные призы для каждого участника победивших команд
+                </p>
+            </div>
+            
+            <div class="prizes-grid">
+                <div class="prize-card prize-first" data-aos="fade-up">
+                    <div class="prize-medal">🥇</div>
+                    <h3 class="prize-place" data-translate="prizes.first.title">1 место</h3>
+                    <div class="prize-icon">💻</div>
+                    <h4 class="prize-item" data-translate="prizes.first.item">Ноутбук</h4>
+                    <p class="prize-description" data-translate="prizes.first.description">
+                        Каждому участнику команды
+                    </p>
+                </div>
+                
+                <div class="prize-card prize-second" data-aos="fade-up" data-aos-delay="100">
+                    <div class="prize-medal">🥈</div>
+                    <h3 class="prize-place" data-translate="prizes.second.title">2 место</h3>
+                    <div class="prize-icon">📱</div>
+                    <h4 class="prize-item" data-translate="prizes.second.item">Планшет</h4>
+                    <p class="prize-description" data-translate="prizes.second.description">
+                        Каждому участнику команды
+                    </p>
+                </div>
+                
+                <div class="prize-card prize-third" data-aos="fade-up" data-aos-delay="200">
+                    <div class="prize-medal">🥉</div>
+                    <h3 class="prize-place" data-translate="prizes.third.title">3 место</h3>
+                    <div class="prize-icon">📲</div>
+                    <h4 class="prize-item" data-translate="prizes.third.item">Смартфон</h4>
+                    <p class="prize-description" data-translate="prizes.third.description">
+                        Каждому участнику команды
+                    </p>
+                </div>
+            </div>
+            
+            <div class="special-prizes" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="special-title" data-translate="prizes.special.title">Специальные номинации</h3>
+                <div class="special-grid">
+                    <div class="special-item">
+                        <i data-lucide="lightbulb" class="special-icon"></i>
+                        <span data-translate="prizes.special.innovation">Самое инновационное решение</span>
+                    </div>
+                    <div class="special-item">
+                        <i data-lucide="users" class="special-icon"></i>
+                        <span data-translate="prizes.special.people">Выбор народа</span>
+                    </div>
+                    <div class="special-item">
+                        <i data-lucide="code" class="special-icon"></i>
+                        <span data-translate="prizes.special.technical">Лучшая техническая реализация</span>
+                    </div>
+                    <div class="special-item">
+                        <i data-lucide="briefcase" class="special-icon"></i>
+                        <span data-translate="prizes.special.business">Лучший бизнес-потенциал</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Judging Criteria -->
+    <section class="criteria-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="criteria.title">Критерии оценки</h2>
+                <p class="section-subtitle" data-translate="criteria.subtitle">
+                    Каждый критерий оценивается в 25% от общего балла
+                </p>
+            </div>
+            
+            <div class="criteria-grid">
+                <div class="criteria-card" data-aos="fade-up">
+                    <div class="criteria-icon">💡</div>
+                    <h3 data-translate="criteria.innovation.title">Инновационность</h3>
+                    <p data-translate="criteria.innovation.description">
+                        Оригинальность идеи, творческий подход к решению проблемы
+                    </p>
+                    <div class="criteria-weight">25%</div>
+                </div>
+                
+                <div class="criteria-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="criteria-icon">⚙️</div>
+                    <h3 data-translate="criteria.technical.title">Техническая реализация</h3>
+                    <p data-translate="criteria.technical.description">
+                        Качество кода, использование AI/ML, архитектура решения
+                    </p>
+                    <div class="criteria-weight">25%</div>
+                </div>
+                
+                <div class="criteria-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="criteria-icon">💼</div>
+                    <h3 data-translate="criteria.business.title">Бизнес-потенциал</h3>
+                    <p data-translate="criteria.business.description">
+                        Коммерческая жизнеспособность, масштабируемость, рыночная потребность
+                    </p>
+                    <div class="criteria-weight">25%</div>
+                </div>
+                
+                <div class="criteria-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="criteria-icon">🎤</div>
+                    <h3 data-translate="criteria.presentation.title">Качество презентации</h3>
+                    <p data-translate="criteria.presentation.description">
+                        Ясность изложения, демонстрация продукта, ответы на вопросы
+                    </p>
+                    <div class="criteria-weight">25%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section class="schedule-section" id="schedule">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="schedule.title">Расписание мероприятия</h2>
+                <p class="section-subtitle" data-translate="schedule.subtitle">
+                    3 дня интенсивной работы и инноваций
+                </p>
+            </div>
+            
+            <div class="schedule-timeline">
+                <!-- Day 1 -->
+                <div class="timeline-day" data-aos="fade-right">
+                    <div class="day-header">
+                        <div class="day-number">1</div>
+                        <div class="day-info">
+                            <h3 class="day-title" data-translate="schedule.day1.title">День первый</h3>
+                            <p class="day-date" data-translate="schedule.day1.date">6 августа 2025 • School 21</p>
+                        </div>
+                    </div>
+                    <div class="day-events">
+                        <div class="event-item">
+                            <span class="event-time">09:00</span>
+                            <span class="event-name" data-translate="schedule.day1.registration">Регистрация и завтрак</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">10:00</span>
+                            <span class="event-name" data-translate="schedule.day1.opening">Церемония открытия</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">11:00</span>
+                            <span class="event-name" data-translate="schedule.day1.pitches">Питчи идей</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">13:00</span>
+                            <span class="event-name" data-translate="schedule.day1.lunch">Обед</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">14:00</span>
+                            <span class="event-name" data-translate="schedule.day1.teams">Формирование команд</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">15:00</span>
+                            <span class="event-name" data-translate="schedule.day1.development">Начало разработки</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">18:00</span>
+                            <span class="event-name" data-translate="schedule.day1.dinner">Ужин</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Day 2 -->
+                <div class="timeline-day" data-aos="fade-left">
+                    <div class="day-header">
+                        <div class="day-number">2</div>
+                        <div class="day-info">
+                            <h3 class="day-title" data-translate="schedule.day2.title">День второй</h3>
+                            <p class="day-date" data-translate="schedule.day2.date">7 августа 2025 • School 21</p>
+                        </div>
+                    </div>
+                    <div class="day-events">
+                        <div class="event-item">
+                            <span class="event-time">09:00</span>
+                            <span class="event-name" data-translate="schedule.day2.breakfast">Завтрак</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">10:00</span>
+                            <span class="event-name" data-translate="schedule.day2.development">Интенсивная разработка</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">11:00</span>
+                            <span class="event-name" data-translate="schedule.day2.workshop1">Воркшоп по AI/ML</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">13:00</span>
+                            <span class="event-name" data-translate="schedule.day2.lunch">Обед</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">14:00</span>
+                            <span class="event-name" data-translate="schedule.day2.mentoring">Сессии менторства</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">16:00</span>
+                            <span class="event-name" data-translate="schedule.day2.workshop2">Воркшоп по питчингу</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">18:00</span>
+                            <span class="event-name" data-translate="schedule.day2.dinner">Ужин</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Day 3 -->
+                <div class="timeline-day" data-aos="fade-right">
+                    <div class="day-header">
+                        <div class="day-number">3</div>
+                        <div class="day-info">
+                            <h3 class="day-title" data-translate="schedule.day3.title">День третий</h3>
+                            <p class="day-date" data-translate="schedule.day3.date">8 августа 2025 • Hilton Samarkand</p>
+                        </div>
+                    </div>
+                    <div class="day-events">
+                        <div class="event-item">
+                            <span class="event-time">09:00</span>
+                            <span class="event-name" data-translate="schedule.day3.breakfast">Завтрак</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">10:00</span>
+                            <span class="event-name" data-translate="schedule.day3.final_dev">Финальная разработка</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">12:00</span>
+                            <span class="event-name" data-translate="schedule.day3.submission">Сдача проектов</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">13:00</span>
+                            <span class="event-name" data-translate="schedule.day3.lunch">Обед</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">14:00</span>
+                            <span class="event-name" data-translate="schedule.day3.presentations">Презентации проектов</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">16:00</span>
+                            <span class="event-name" data-translate="schedule.day3.judging">Оценка жюри</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">17:00</span>
+                            <span class="event-name" data-translate="schedule.day3.awards">Церемония награждения</span>
+                        </div>
+                        <div class="event-item">
+                            <span class="event-time">18:00</span>
+                            <span class="event-name" data-translate="schedule.day3.networking">Нетворкинг</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section class="locations-section" id="locations">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="locations.title">Локации</h2>
+                <p class="section-subtitle" data-translate="locations.subtitle">
+                    Современные площадки в сердце Самарканда
+                </p>
+            </div>
+            
+            <div class="locations-grid">
+                <div class="location-card" data-aos="fade-up">
+                    <div class="location-image">
+                        <div class="location-placeholder">🏢</div>
+                    </div>
+                    <div class="location-info">
+                        <h3 class="location-name">School 21</h3>
+                        <p class="location-description" data-translate="locations.school21.description">
+                            Инновационная IT-школа для дней разработки и воркшопов
+                        </p>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <i data-lucide="calendar" class="detail-icon"></i>
+                                <span data-translate="locations.school21.days">6-7 августа</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="wifi" class="detail-icon"></i>
+                                <span data-translate="locations.school21.features">Высокоскоростной интернет</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="coffee" class="detail-icon"></i>
+                                <span data-translate="locations.school21.amenities">Зона отдыха</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="location-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="location-image">
+                        <div class="location-placeholder">🏨</div>
+                    </div>
+                    <div class="location-info">
+                        <h3 class="location-name">Hilton Samarkand Regency</h3>
+                        <p class="location-description" data-translate="locations.hilton.description">
+                            Премиальный отель для финальных презентаций и церемонии награждения
+                        </p>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <i data-lucide="calendar" class="detail-icon"></i>
+                                <span data-translate="locations.hilton.days">8 августа</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="presentation" class="detail-icon"></i>
+                                <span data-translate="locations.hilton.features">Конференц-залы</span>
+                            </div>
+                            <div class="detail-item">
+                                <i data-lucide="award" class="detail-icon"></i>
+                                <span data-translate="locations.hilton.amenities">Торжественная атмосфера</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration-section" id="register">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="registration.title">Регистрация</h2>
+                <p class="section-subtitle" data-translate="registration.subtitle">
+                    Подайте заявку до 15 июля 2025
+                </p>
+            </div>
+            
+            <div class="registration-content">
+                <div class="registration-info" data-aos="fade-right">
+                    <h3 data-translate="registration.requirements.title">Требования к участникам</h3>
+                    <ul class="requirements-list">
+                        <li data-translate="registration.requirements.age">Возраст: 18+ лет</li>
+                        <li data-translate="registration.requirements.team">Команда: 4-6 человек</li>
+                        <li data-translate="registration.requirements.commitment">Участие в течение всех 3 дней</li>
+                        <li data-translate="registration.requirements.laptop">Собственный ноутбук/компьютер</li>
+                        <li data-translate="registration.requirements.ai">Готовность работать с AI/ML</li>
+                    </ul>
+                    
+                    <h3 data-translate="registration.process.title">Процесс отбора</h3>
+                    <ol class="process-list">
+                        <li data-translate="registration.process.application">Подача заявки через форму</li>
+                        <li data-translate="registration.process.review">Экспертная оценка</li>
+                        <li data-translate="registration.process.notification">Уведомление о результатах</li>
+                        <li data-translate="registration.process.confirmation">Подтверждение участия</li>
+                    </ol>
+                </div>
+                
+                <div class="registration-form-container" data-aos="fade-left">
+                    <form class="registration-form" id="registrationForm">
+                        <div class="form-step active" data-step="1">
+                            <h3 data-translate="form.personal.title">Личная информация</h3>
+                            
+                            <div class="form-group">
+                                <label for="fullName" data-translate="form.personal.name">Полное имя *</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" data-translate="form.personal.email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" data-translate="form.personal.phone">Телефон *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="age" data-translate="form.personal.age">Возраст *</label>
+                                <input type="number" id="age" name="age" min="18" max="65" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-step" data-step="2">
+                            <h3 data-translate="form.experience.title">Опыт и навыки</h3>
+                            
+                            <div class="form-group">
+                                <label for="role" data-translate="form.experience.role">Роль в команде *</label>
+                                <select id="role" name="role" required>
+                                    <option value="" data-translate="form.select_option">Выберите роль</option>
+                                    <option value="developer" data-translate="form.roles.developer">Разработчик</option>
+                                    <option value="designer" data-translate="form.roles.designer">Дизайнер</option>
+                                    <option value="analyst" data-translate="form.roles.analyst">Аналитик</option>
+                                    <option value="pm" data-translate="form.roles.pm">Менеджер проекта</option>
+                                    <option value="marketer" data-translate="form.roles.marketer">Маркетолог</option>
+                                    <option value="other" data-translate="form.roles.other">Другое</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="experience" data-translate="form.experience.level">Опыт работы *</label>
+                                <select id="experience" name="experience" required>
+                                    <option value="" data-translate="form.select_option">Выберите уровень</option>
+                                    <option value="student" data-translate="form.experience.student">Студент</option>
+                                    <option value="junior" data-translate="form.experience.junior">Младший (до 2 лет)</option>
+                                    <option value="middle" data-translate="form.experience.middle">Средний (2-5 лет)</option>
+                                    <option value="senior" data-translate="form.experience.senior">Старший (5+ лет)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="skills" data-translate="form.experience.skills">Ключевые навыки *</label>
+                                <textarea id="skills" name="skills" rows="4" 
+                                    placeholder="Например: Python, JavaScript, Machine Learning, UI/UX Design" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-step" data-step="3">
+                            <h3 data-translate="form.team.title">Информация о команде</h3>
+                            
+                            <div class="form-group">
+                                <label for="hasTeam" data-translate="form.team.has_team">У вас есть команда?</label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="hasTeam" value="yes">
+                                        <span data-translate="form.team.yes">Да, у меня есть команда</span>
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="hasTeam" value="no">
+                                        <span data-translate="form.team.no">Нет, ищу команду</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" id="teamNameGroup" style="display: none;">
+                                <label for="teamName" data-translate="form.team.name">Название команды</label>
+                                <input type="text" id="teamName" name="teamName">
+                            </div>
+                            
+                            <div class="form-group" id="teamMembersGroup" style="display: none;">
+                                <label for="teamMembers" data-translate="form.team.members">Участники команды</label>
+                                <textarea id="teamMembers" name="teamMembers" rows="4" 
+                                    placeholder="Имена и роли участников команды"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-step" data-step="4">
+                            <h3 data-translate="form.motivation.title">Мотивация</h3>
+                            
+                            <div class="form-group">
+                                <label for="aiExperience" data-translate="form.motivation.ai_experience">Опыт работы с AI/ML *</label>
+                                <textarea id="aiExperience" name="aiExperience" rows="3" 
+                                    placeholder="Опишите ваш опыт работы с искусственным интеллектом" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="motivation" data-translate="form.motivation.why">Почему вы хотите участвовать? *</label>
+                                <textarea id="motivation" name="motivation" rows="4" 
+                                    placeholder="Расскажите о ваших целях и мотивации" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="projectIdea" data-translate="form.motivation.idea">Есть ли у вас идея проекта?</label>
+                                <textarea id="projectIdea" name="projectIdea" rows="3" 
+                                    placeholder="Опишите вашу идею (необязательно)"></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Form Navigation -->
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary" id="prevStep" style="display: none;">
+                                <i data-lucide="arrow-left" class="btn-icon"></i>
+                                <span data-translate="form.prev">Назад</span>
+                            </button>
+                            
+                            <div class="form-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill"></div>
+                                </div>
+                                <span class="progress-text">1 / 4</span>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" id="nextStep">
+                                <span data-translate="form.next">Далее</span>
+                                <i data-lucide="arrow-right" class="btn-icon"></i>
+                            </button>
+                            
+                            <button type="submit" class="btn btn-primary" id="submitForm" style="display: none;">
+                                <i data-lucide="send" class="btn-icon"></i>
+                                <span data-translate="form.submit">Отправить заявку</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="faq.title">Часто задаваемые вопросы</h2>
+                <p class="section-subtitle" data-translate="faq.subtitle">
+                    Ответы на самые популярные вопросы
+                </p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item" data-aos="fade-up">
+                    <button class="faq-question">
+                        <span data-translate="faq.q1.question">Нужно ли иметь готовую команду для участия?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-translate="faq.q1.answer">
+                            Нет, наличие готовой команды не обязательно. В первый день хакатона будет 
+                            специальная сессия для формирования команд, где участники смогут найти 
+                            единомышленников с дополняющими навыками.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <button class="faq-question">
+                        <span data-translate="faq.q2.question">Какой уровень знаний AI/ML необходим?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-translate="faq.q2.answer">
+                            Приветствуются участники с разным уровнем подготовки. Важно иметь базовое 
+                            понимание AI/ML концепций или желание изучать. Будут проведены воркшопы 
+                            для участников с различным уровнем знаний.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <button class="faq-question">
+                        <span data-translate="faq.q3.question">Предоставляется ли проживание и питание?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-translate="faq.q3.answer">
+                            Питание (завтраки, обеды, ужины) предоставляется всем участникам бесплатно. 
+                            Для иногородних участников может быть организовано льготное размещение. 
+                            Подробности будут высланы после одобрения заявки.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <button class="faq-question">
+                        <span data-translate="faq.q4.question">Можно ли использовать готовые библиотеки и API?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-translate="faq.q4.answer">
+                            Да, использование готовых библиотек, фреймворков и API не только разрешено, 
+                            но и приветствуется. Главное требование - продемонстрировать инновационное 
+                            применение AI/ML технологий в вашем решении.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
+                    <button class="faq-question">
+                        <span data-translate="faq.q5.question">Что нужно принести с собой?</span>
+                        <i data-lucide="chevron-down" class="faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p data-translate="faq.q5.answer">
+                            Обязательно: ноутбук/компьютер, зарядные устройства, удобную одежду. 
+                            Рекомендуется: внешняя мышь, наушники, power bank. Интернет, рабочие места 
+                            и основное оборудование будут предоставлены организаторами.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizers Section -->
+    <section class="organizers-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title" data-translate="organizers.title">Организаторы и партнеры</h2>
+                <p class="section-subtitle" data-translate="organizers.subtitle">
+                    Ведущие организации в сфере IT и инноваций
+                </p>
+            </div>
+            
+            <div class="organizers-grid">
+                <div class="organizer-card main-organizer" data-aos="fade-up">
+                    <div class="organizer-logo">🚀</div>
+                    <h3>Angel Connect</h3>
+                    <p class="organizer-role" data-translate="organizers.angel_connect.role">Главный организатор</p>
+                    <p class="organizer-description" data-translate="organizers.angel_connect.description">
+                        Первая экосистема для стартапов в Центральной Азии
+                    </p>
+                </div>
+                
+                <div class="organizer-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="organizer-logo">🏢</div>
+                    <h3>IT Park</h3>
+                    <p class="organizer-role" data-translate="organizers.it_park.role">Партнер</p>
+                    <p class="organizer-description" data-translate="organizers.it_park.description">
+                        Технопарк и центр IT-инноваций Узбекистана
+                    </p>
+                </div>
+                
+                <div class="organizer-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="organizer-logo">🏛️</div>
+                    <h3 data-translate="organizers.ministry.name">Министерство цифровых технологий</h3>
+                    <p class="organizer-role" data-translate="organizers.ministry.role">Официальный партнер</p>
+                    <p class="organizer-description" data-translate="organizers.ministry.description">
+                        Государственная поддержка цифровой трансформации
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="section-container">
+            <div class="contact-content" data-aos="fade-up">
+                <h2 class="section-title" data-translate="contact.title">Остались вопросы?</h2>
+                <p class="section-subtitle" data-translate="contact.subtitle">
+                    Свяжитесь с нами любым удобным способом
+                </p>
+                
+                <div class="contact-methods">
+                    <a href="https://t.me/networkangelconnect" class="contact-item" target="_blank">
+                        <i data-lucide="send" class="contact-icon"></i>
+                        <span data-translate="contact.telegram">Telegram: @networkangelconnect</span>
+                    </a>
+                    <a href="mailto:info@angelconnect.uz" class="contact-item">
+                        <i data-lucide="mail" class="contact-icon"></i>
+                        <span>Email: info@angelconnect.uz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <div class="logo-icon">🤖</div>
+                        <span>AI Хакатон Самарканд</span>
+                    </div>
+                    <p class="footer-description" data-translate="footer.description">
+                        Первый специализированный AI хакатон в Центральной Азии
+                    </p>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="#about" data-translate="footer.about">О хакатоне</a>
+                        <a href="#prizes" data-translate="footer.prizes">Призы</a>
+                        <a href="#schedule" data-translate="footer.schedule">Расписание</a>
+                        <a href="#register" data-translate="footer.register">Регистрация</a>
+                    </div>
+                    
+                    <div class="footer-social">
+                        <a href="https://t.me/networkangelconnect" target="_blank" aria-label="Telegram">
+                            <i data-lucide="send"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <span data-translate="footer.copyright">© 2025 Angel Connect. Все права защищены.</span>
+                </div>
+                <div class="footer-date">
+                    <span data-translate="footer.event_date">6-8 августа 2025, Самарканд</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK (optional - for form submissions) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Scripts -->
+    <script src="translations-hackathon.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="hackathon-script.js"></script>
+</body>
+</html>

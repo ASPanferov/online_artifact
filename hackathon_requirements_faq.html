@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Требования к проектам и FAQ - AI Хакатон Самарканд 2025</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            font-weight: 400;
+            color-scheme: dark;
+            color: white;
+            background-color: hsl(270, 100%, 4%);
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* CSS Variables */
+        :root {
+            /* Base Colors */
+            --background: 270 100% 4%;
+            --foreground: 0 0% 100%;
+            
+            /* Component Colors */
+            --card: 270 50% 8%;
+            --card-foreground: 0 0% 100%;
+            
+            /* Brand Colors */
+            --primary: 300 100% 60%;
+            --primary-foreground: 0 0% 100%;
+            --secondary: 330 100% 55%;
+            --secondary-foreground: 0 0% 100%;
+            --accent: 0 100% 65%;
+            --accent-foreground: 0 0% 100%;
+            
+            /* Utility Colors */
+            --muted: 270 30% 15%;
+            --muted-foreground: 240 15% 65%;
+            --border: 270 30% 20%;
+            --input: 270 30% 15%;
+            --ring: 300 100% 60%;
+            
+            /* Border Radius */
+            --radius: 0.5rem;
+            
+            /* Custom Gradients */
+            --gradient-primary: linear-gradient(135deg, hsl(300 100% 60%), hsl(330 100% 55%));
+            --gradient-hero: linear-gradient(135deg, hsl(270 100% 4%), hsl(300 50% 20%));
+            --gradient-card: linear-gradient(135deg, hsl(270 50% 8%), hsl(280 40% 12%));
+            --gradient-accent: linear-gradient(90deg, hsl(0 100% 65%), hsl(330 100% 55%));
+            
+            /* Custom Shadows */
+            --shadow-glow: 0 0 40px hsl(300 100% 60% / 0.3);
+            --shadow-card: 0 10px 30px hsl(270 50% 4% / 0.5);
+            --shadow-button: 0 4px 15px hsl(300 100% 60% / 0.4);
+        }
+
+        /* Layout Classes */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        /* Flexbox */
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .items-start {
+            align-items: flex-start;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-3 {
+            gap: 0.75rem;
+        }
+
+        .gap-6 {
+            gap: 1.5rem;
+        }
+
+        .gap-8 {
+            gap: 2rem;
+        }
+
+        /* Grid */
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        /* Spacing */
+        .p-4 {
+            padding: 1rem;
+        }
+
+        .p-6 {
+            padding: 1.5rem;
+        }
+
+        .py-20 {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .mb-3 {
+            margin-bottom: 0.75rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem;
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem;
+        }
+
+        .mb-16 {
+            margin-bottom: 4rem;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .mt-8 {
+            margin-top: 2rem;
+        }
+
+        .mt-12 {
+            margin-top: 3rem;
+        }
+
+        .mt-16 {
+            margin-top: 4rem;
+        }
+
+        /* Typography */
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+        }
+
+        .text-6xl {
+            font-size: 3.75rem;
+            line-height: 1;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-white {
+            color: white;
+        }
+
+        .text-primary {
+            color: hsl(var(--primary));
+        }
+
+        .text-secondary {
+            color: hsl(var(--secondary));
+        }
+
+        .text-accent {
+            color: hsl(var(--accent));
+        }
+
+        .text-muted-foreground {
+            color: hsl(var(--muted-foreground));
+        }
+
+        /* Backgrounds */
+        .bg-background {
+            background-color: hsl(var(--background));
+        }
+
+        .bg-gradient-card {
+            background: var(--gradient-card);
+        }
+
+        .bg-gradient-primary {
+            background: var(--gradient-primary);
+        }
+
+        .bg-white\/5 {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Borders */
+        .border {
+            border-width: 1px;
+        }
+
+        .border-white\/20 {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .border-accent\/30 {
+            border-color: hsl(var(--accent) / 0.3);
+        }
+
+        .rounded-lg {
+            border-radius: var(--radius);
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        /* Shadows */
+        .shadow-card {
+            box-shadow: var(--shadow-card);
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            border-radius: calc(var(--radius) - 2px);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            height: 2.5rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Card Styles */
+        .card {
+            border-radius: var(--radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--gradient-card);
+            box-shadow: var(--shadow-card);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            padding-bottom: 1rem;
+        }
+
+        .card-content {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Utility classes */
+        .space-y-2 > * + * {
+            margin-top: 0.5rem;
+        }
+
+        .space-y-3 > * + * {
+            margin-top: 0.75rem;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 1.5rem;
+        }
+
+        .max-w-3xl {
+            max-width: 48rem;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .w-5 {
+            width: 1.25rem;
+        }
+
+        .h-5 {
+            height: 1.25rem;
+        }
+
+        .w-16 {
+            width: 4rem;
+        }
+
+        .h-16 {
+            height: 4rem;
+        }
+
+        .inline-flex {
+            display: inline-flex;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+            
+            .md\:text-6xl {
+                font-size: 3.75rem;
+                line-height: 1;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* Special backgrounds for sections */
+        .bg-primary\/20 {
+            background-color: hsl(var(--primary) / 0.2);
+        }
+
+        .bg-secondary\/20 {
+            background-color: hsl(var(--secondary) / 0.2);
+        }
+
+        .bg-accent\/20 {
+            background-color: hsl(var(--accent) / 0.2);
+        }
+
+        .text-white\/90 {
+            color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <!-- Project Requirements Section -->
+    <section class="py-20 bg-gradient-card" id="requirements">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="requirements_title">
+                    Требования к проектам
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto" data-translate="requirements_subtitle">
+                    Важные правила и ограничения для участия в хакатоне
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- Team Requirements -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">👥</span>
+                            <h3 class="card-title" data-translate="team_requirements">Требования к команде</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">•</span>
+                                <span data-translate="req_team_size"><strong>Размер команды:</strong> от 3 до 5 участников</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">•</span>
+                                <span data-translate="req_age"><strong>Возраст:</strong> все участники должны быть старше 16 лет</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">•</span>
+                                <span data-translate="req_availability"><strong>Доступность:</strong> все участники должны присутствовать все 3 дня</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">•</span>
+                                <span data-translate="req_international"><strong>Гражданство:</strong> открыто для участников из любых стран</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Project Requirements -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">🤖</span>
+                            <h3 class="card-title" data-translate="project_requirements">Требования к проекту</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="text-secondary mt-1">•</span>
+                                <span data-translate="req_ai_focus"><strong>AI-направленность:</strong> проект должен использовать технологии искусственного интеллекта</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-secondary mt-1">•</span>
+                                <span data-translate="req_development"><strong>Разработка:</strong> основная работа должна быть выполнена во время хакатона</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-secondary mt-1">•</span>
+                                <span data-translate="req_demo"><strong>Демонстрация:</strong> рабочий прототип или MVP к концу хакатона</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-secondary mt-1">•</span>
+                                <span data-translate="req_presentation"><strong>Презентация:</strong> 5-минутный питч проекта для жюри</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Special Notice for Existing Projects -->
+            <div class="card mb-8">
+                <div class="card-header">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-3xl">⚠️</span>
+                        <h3 class="card-title text-accent" data-translate="existing_projects_title">Участие с существующими проектами</h3>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="bg-white/5 border border-accent/30 rounded-lg p-4">
+                        <p class="text-muted-foreground mb-3" data-translate="existing_projects_intro">
+                            Если у вашей команды уже есть действующий проект, вы можете участвовать в хакатоне при соблюдении следующих условий:
+                        </p>
+                        <ul class="space-y-2">
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-1">1.</span>
+                                <span data-translate="existing_rule_1">Вы должны создать <strong>новый AI-модуль</strong> или функцию для вашего проекта</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-1">2.</span>
+                                <span data-translate="existing_rule_2">Весь код нового модуля должен быть написан во время хакатона</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-1">3.</span>
+                                <span data-translate="existing_rule_3">Презентация должна фокусироваться только на новом модуле, а не на всем проекте</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-accent mt-1">4.</span>
+                                <span data-translate="existing_rule_4">Обязательно использование GitHub с историей коммитов для отслеживания работы</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Technical Requirements -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">💻</span>
+                            <h3 class="card-title" data-translate="tech_requirements">Технические требования</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">•</span>
+                                <span data-translate="tech_github"><strong>GitHub:</strong> обязательное использование с историей коммитов</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">•</span>
+                                <span data-translate="tech_equipment"><strong>Оборудование:</strong> собственные ноутбуки или компьютеры School 21 (Linux)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">•</span>
+                                <span data-translate="tech_ai_tools"><strong>AI-инструменты:</strong> разрешено использование любых AI-сервисов и библиотек</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">📋</span>
+                            <h3 class="card-title" data-translate="submission_requirements">Требования к подаче</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="text-secondary mt-1">•</span>
+                                <span data-translate="sub_deadline"><strong>Дедлайн:</strong> 1 августа 2025 года</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-secondary mt-1">•</span>
+                                <span data-translate="sub_selection"><strong>Отбор:</strong> с 1 по 3 августа 2025 года</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-secondary mt-1">•</span>
+                                <span data-translate="sub_confirmation"><strong>Подтверждение:</strong> до 3 августа 2025 года</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-background" id="faq">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="faq_title">
+                    Частые вопросы
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto" data-translate="faq_subtitle">
+                    Ответы на самые популярные вопросы участников
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- General Questions -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold text-white mb-6" data-translate="faq_general">🎯 Общие вопросы</h3>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-primary" data-translate="faq_international_q">Могут ли участвовать граждане других стран?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_international_a">
+                                Да, хакатон открыт для участников из любых стран. Главное условие — возможность физически присутствовать в Самарканде все 3 дня мероприятия.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-primary" data-translate="faq_accommodation_q">Предоставляется ли бесплатное проживание?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_accommodation_a">
+                                Да, для иногородних участников предоставляется бесплатное размещение в общежитии School 21 с 5 по 9 августа. Питание также включено в программу.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-primary" data-translate="faq_language_q">Нужно ли знание узбекского языка?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_language_a">
+                                Нет, мероприятие проходит на трех языках: узбекском, русском и английском. Вы можете выбрать удобный язык для презентации проекта.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-primary" data-translate="faq_equipment_q">Какое оборудование предоставляется?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_equipment_a">
+                                Участники могут использовать собственные ноутбуки или компьютеры School 21 с операционной системой Linux. Wi-Fi и электричество предоставляются бесплатно.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Questions -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-semibold text-white mb-6" data-translate="faq_projects">🚀 Вопросы о проектах</h3>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-secondary" data-translate="faq_existing_q">Можно ли участвовать с готовым проектом?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_existing_a">
+                                Частично. Если у вас есть готовый проект, вы можете создать для него новый AI-модуль. Но основная разработка должна происходить во время хакатона, а презентация — фокусироваться только на новом модуле.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-secondary" data-translate="faq_ai_required_q">Обязательно ли использовать AI в проекте?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_ai_required_a">
+                                Да, это AI-хакатон, поэтому все проекты должны включать технологии искусственного интеллекта. Это может быть машинное обучение, NLP, компьютерное зрение или другие AI-решения.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-secondary" data-translate="faq_development_time_q">Нужно ли разрабатывать все за 3 дня?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_development_time_a">
+                                Основная разработка должна происходить во время хакатона. Допускается использование существующих библиотек, API и инструментов, но ключевая функциональность должна быть создана за эти 3 дня.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="font-semibold text-secondary" data-translate="faq_team_size_q">Что если в команде меньше 3 человек?</h4>
+                        </div>
+                        <div class="card-content">
+                            <p class="text-muted-foreground" data-translate="faq_team_size_a">
+                                К участию допускаются только команды от 3 до 5 человек. Если у вас неполная команда, мы поможем найти участников через официальный чат участников хакатона.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Selection Process -->
+            <div class="mt-16">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="text-3xl">📝</span>
+                            <h3 class="card-title" data-translate="selection_process_title">Процесс отбора команд</h3>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="text-center">
+                                <div class="bg-primary/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-2xl">1️⃣</span>
+                                </div>
+                                <h4 class="font-semibold mb-2" data-translate="selection_step1_title">Подача заявок</h4>
+                                <p class="text-sm text-muted-foreground" data-translate="selection_step1_desc">До 1 августа команды подают заявки через сайт</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-secondary/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-2xl">2️⃣</span>
+                                </div>
+                                <h4 class="font-semibold mb-2" data-translate="selection_step2_title">Отбор</h4>
+                                <p class="text-sm text-muted-foreground" data-translate="selection_step2_desc">С 1 по 3 августа оценка заявок по качеству идеи и команды</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="bg-accent/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-2xl">3️⃣</span>
+                                </div>
+                                <h4 class="font-semibold mb-2" data-translate="selection_step3_title">Уведомление</h4>
+                                <p class="text-sm text-muted-foreground" data-translate="selection_step3_desc">До 3 августа подтверждение участия выбранных команд</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-4 bg-white/5 rounded-lg border border-white/20">
+                            <p class="text-center text-muted-foreground" data-translate="selection_note">
+                                <strong>Примечание:</strong> При большом количестве заявок приоритет отдается командам с наиболее проработанными идеями, 
+                                разнообразным составом (разработчики + дизайнеры + бизнес) и готовностью к интенсивной работе.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Info -->
+            <div class="mt-12 text-center">
+                <div class="bg-gradient-primary rounded-lg p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-white" data-translate="contact_title">Остались вопросы?</h3>
+                    <p class="text-white/90 mb-4" data-translate="contact_text">
+                        Присоединяйтесь к официальному Telegram-каналу участников для получения актуальной информации и ответов на вопросы.
+                    </p>
+                    <a href="https://t.me/+bDbZ96gZvf4xZTMy" target="_blank" class="btn btn-glass inline-flex items-center gap-3">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                        <span data-translate="contact_telegram">Канал участников</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Хакатон Самарканд 2025</title>
+    <link rel="stylesheet" href="Landing page/styles.css">
+    
+    <!-- Language Picker Styles -->
+    <style>
+        /* Hackathon Language Picker */
+        .language-picker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(16, 16, 16, 0.95) 0%, rgba(32, 32, 32, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 4px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 102, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .language-picker:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 102, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Ensure hero content stays centered */
+        .hero-section .container {
+            position: relative;
+        }
+        
+        .language-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 80px;
+            justify-content: center;
+        }
+        
+        .language-btn:hover {
+            background: rgba(0, 102, 255, 0.2);
+            color: #00D4FF;
+            transform: scale(1.05);
+        }
+        
+        .language-btn.active {
+            background: linear-gradient(135deg, #0066FF 0%, #00D4FF 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: linear-gradient(135deg, rgba(16, 16, 16, 0.95) 0%, rgba(32, 32, 32, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 102, 255, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            min-width: 160px;
+        }
+        
+        .language-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .lang-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .lang-option:hover {
+            background: rgba(0, 102, 255, 0.2);
+            color: #00D4FF;
+            transform: translateX(4px);
+        }
+        
+        .lang-option.active {
+            background: linear-gradient(135deg, #0066FF 0%, #00D4FF 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);
+        }
+        
+        .lang-flag {
+            font-size: 18px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .dropdown-icon {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .language-picker.open .dropdown-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .language-picker {
+                top: 15px;
+                right: 15px;
+                transform: scale(0.9);
+            }
+            
+            .language-btn {
+                padding: 10px 14px;
+                font-size: 12px;
+                min-width: 70px;
+            }
+            
+            .language-dropdown {
+                min-width: 140px;
+                right: -10px;
+            }
+            
+            .lang-option {
+                padding: 10px 14px;
+                font-size: 12px;
+                gap: 10px;
+            }
+            
+            .lang-flag {
+                font-size: 16px;
+            }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .language-picker {
+                top: 10px;
+                right: 10px;
+                transform: scale(0.85);
+            }
+            
+            .language-dropdown {
+                right: -20px;
+            }
+        }
+        
+        /* Add slideInRight animation */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Modal Language Picker */
+        .modal-language-picker {
+            position: relative;
+            margin-right: auto;
+        }
+        
+        .modal-lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .modal-lang-btn:hover {
+            background: rgba(0, 102, 255, 0.2);
+            border-color: rgba(0, 102, 255, 0.4);
+        }
+        
+        .modal-lang-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 4px;
+            background: rgba(16, 16, 16, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 4px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .modal-lang-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .modal-lang-option {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .modal-lang-option:hover {
+            background: rgba(0, 102, 255, 0.2);
+            color: #00D4FF;
+        }
+        
+        .modal-title-section {
+            flex: 1;
+            text-align: center;
+            margin: 0 20px;
+        }
+        
+        .modal-subtitle {
+            font-size: 14px;
+            color: #888;
+            margin-top: 4px;
+        }
+        
+        /* Form Styles */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .radio-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 102, 255, 0.3);
+        }
+        
+        .radio-label input[type="radio"] {
+            accent-color: #0066FF;
+        }
+        
+        .char-counter {
+            text-align: right;
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+        }
+        
+        .form-note {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            color: #FFC107;
+            margin: 16px 0;
+        }
+        
+        /* Success Modal */
+        .success-icon {
+            animation: successPulse 0.6s ease-out;
+        }
+        
+        @keyframes successPulse {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .telegram-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Partners Section */
+        .partners-section {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 20;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            padding: 40px 0 20px;
+        }
+        
+        .partners-strip {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 0 20px;
+        }
+        
+        .partner-logo {
+            height: 60px;
+            width: auto;
+            max-width: 200px;
+            filter: brightness(0) invert(1);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            object-fit: contain;
+        }
+        
+        .partner-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .partners-label {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .partners-section {
+                padding: 30px 0 15px;
+            }
+            
+            .partners-strip {
+                gap: 20px;
+                padding: 0 15px;
+            }
+            
+            .partner-logo {
+                height: 45px;
+            }
+            
+            .partners-label {
+                font-size: 12px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .partners-section {
+                padding: 25px 0 10px;
+            }
+            
+            .partners-strip {
+                gap: 15px;
+                padding: 0 10px;
+            }
+            
+            .partner-logo {
+                height: 35px;
+            }
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <!-- Hackathon Language Picker -->
+    <div class="language-picker" id="languagePicker">
+        <button class="language-btn" id="languageBtn">
+            <span class="lang-flag" id="currentFlag">🇷🇺</span>
+            <span class="current-lang" id="currentLang">RU</span>
+            <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <button class="lang-option active" data-lang="ru">
+                <span class="lang-flag">🇷🇺</span>
+                <span class="lang-name">RU</span>
+            </button>
+            <button class="lang-option" data-lang="uz">
+                <span class="lang-flag">🇺🇿</span>
+                <span class="lang-name">UZ</span>
+            </button>
+            <button class="lang-option" data-lang="en">
+                <span class="lang-flag">🇬🇧</span>
+                <span class="lang-name">EN</span>
+            </button>
+        </div>
+    </div>
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen relative bg-gradient-hero overflow-hidden">
+        <!-- Animated Background -->
+        <div class="animated-background">
+            <div class="absolute inset-0 opacity-30">
+                <img src="/hackathon-hero-bg.jpg" alt="Hero Background" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Floating shapes container -->
+            <div id="floating-shapes" class="absolute inset-0"></div>
+            
+            <!-- Grid pattern -->
+            <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+            
+            <!-- Light rays -->
+            <div class="absolute top-20 left-20 w-96 h-96 bg-gradient-primary opacity-20 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-20 w-80 h-80 bg-gradient-accent opacity-15 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-primary opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s;"></div>
+        </div>
+        
+        <!-- Content -->
+        <div class="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
+            <div class="animate-fadeIn">
+                <h1 class="text-6xl md:text-8xl font-bold mb-8 text-white" data-translate="title">
+                    AI ХАКАТОН САМАРКАНД
+                </h1>
+                
+                <p class="text-xl md:text-2xl mb-12 text-muted-foreground max-w-3xl mx-auto text-center" data-translate="subtitle">
+                    3-дневный интенсивный хакатон с международным участием для разработчиков, дизайнеров и предпринимателей
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 mb-12 justify-center items-center text-lg">
+                    <div class="flex items-center gap-3 text-white bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+                        <span class="text-2xl">📅  </span>
+                        <span class="font-medium" data-translate="date">6-8 августа 2025</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-white bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+                        <span class="text-2xl">📍 </span>
+                        <span class="font-medium" data-translate="location">Самарканд, Узбекистан</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-white bg-white/10 px-4 py-2 rounded-full backdrop-blur-sm">
+                        <span class="text-2xl">👥 </span>
+                        <span class="font-medium" data-translate="participants">100 участников (команды 3-5 человек)</span>
+                    </div>
+                </div>
+                
+                <!-- Countdown Timer -->
+                <div class="countdown-timer mb-12">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">0</span>
+                        <span class="countdown-label" data-translate="days">дней</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label" data-translate="hours">часов</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label" data-translate="minutes">минут</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label" data-translate="seconds">секунд</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button class="btn btn-hero" onclick="openModal()" data-translate="register_btn">
+                        ПОДАТЬ ЗАЯВКУ
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Partners Section -->
+        <div class="partners-section">
+            <div class="partners-label" data-translate="partners_label">При поддержке</div>
+            <div class="partners-strip">
+                <img src="public/logo/angel-connect-logo.png" alt="Angel Connect" class="partner-logo">
+                <img src="public/logo/it-park-uzbekistan.png" alt="IT Park Uzbekistan" class="partner-logo">
+                <img src="public/logo/white-logo.png" alt="Partner Logo" class="partner-logo">
+                <img src="public/logo/Font_1.png" alt="Font Partner" class="partner-logo">
+                <img src="public/logo/chatgpt-logo.png" alt="AI Partner" class="partner-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-gradient-card" id="stats">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stats-card">
+                    <div class="text-5xl mb-4">🔥</div>
+                    <div class="stats-number">3</div>
+                    <div class="stats-label" data-translate="stats_days">Дня интенсива</div>
+                </div>
+                <div class="stats-card">
+                    <div class="text-5xl mb-4">👥</div>
+                    <div class="stats-number">100</div>
+                    <div class="stats-label" data-translate="stats_participants">Участников</div>
+                </div>
+                <div class="stats-card">
+                    <div class="text-5xl mb-4">🎯</div>
+                    <div class="stats-number">24/7</div>
+                    <div class="stats-label" data-translate="stats_mentors">Менторская помощь</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Section -->
+    <section class="py-20 bg-background" id="program">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="program_title">
+                    Программа хакатона
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto" data-translate="program_subtitle">
+                    Три дня насыщенной программы с лекциями, воркшопами и интенсивной разработкой
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Day 1 -->
+                <div class="program-card">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-3xl">🚀</span>
+                        <h3 class="program-title" data-translate="day1_title">День 1 - Старт (School 21)</h3>
+                    </div>
+                    <ul class="program-schedule">
+                        <li>
+                            <span class="program-time">10:00</span>
+                            <span class="program-event" data-translate="day1_10">Регистрация участников</span>
+                        </li>
+                        <li>
+                            <span class="program-time">11:00</span>
+                            <span class="program-event" data-translate="day1_11">Открытие, приветствие партнеров</span>
+                        </li>
+                        <li>
+                            <span class="program-time">12:00</span>
+                            <span class="program-event" data-translate="day1_12">Питчи команд (1 минута на идею)</span>
+                        </li>
+                        <li>
+                            <span class="program-time">13:00</span>
+                            <span class="program-event" data-translate="day1_13">Обед</span>
+                        </li>
+                        <li>
+                            <span class="program-time">14:00</span>
+                            <span class="program-event" data-translate="day1_14">Начало разработки</span>
+                        </li>
+                        <li>
+                            <span class="program-time">18:00</span>
+                            <span class="program-event" data-translate="day1_18">Ужин и продолжение работы</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Day 2 -->
+                <div class="program-card">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-3xl">⚡</span>
+                        <h3 class="program-title" data-translate="day2_title">День 2 - Разработка (School 21)</h3>
+                    </div>
+                    <ul class="program-schedule">
+                        <li>
+                            <span class="program-time">9:00</span>
+                            <span class="program-event" data-translate="day2_09">Завтрак</span>
+                        </li>
+                        <li>
+                            <span class="program-time">10:00</span>
+                            <span class="program-event" data-translate="day2_10">Воркшопы по инструментам</span>
+                        </li>
+                        <li>
+                            <span class="program-time">11:00</span>
+                            <span class="program-event" data-translate="day2_11">Менторские сессии</span>
+                        </li>
+                        <li>
+                            <span class="program-time">13:00</span>
+                            <span class="program-event" data-translate="day2_13">Обед</span>
+                        </li>
+                        <li>
+                            <span class="program-time">14:00</span>
+                            <span class="program-event" data-translate="day2_14">Интенсивная разработка</span>
+                        </li>
+                        <li>
+                            <span class="program-time">16:00</span>
+                            <span class="program-event" data-translate="day2_16">Менторские консультации</span>
+                        </li>
+                        <li>
+                            <span class="program-time">18:00</span>
+                            <span class="program-event" data-translate="day2_18">Ужин и продолжение работы</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Day 3 -->
+                <div class="program-card">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-3xl">🏆</span>
+                        <h3 class="program-title" data-translate="day3_title">День 3 - Финал</h3>
+                    </div>
+                    <ul class="program-schedule">
+                        <li>
+                            <span class="program-time">9:00</span>
+                            <span class="program-event" data-translate="day3_09">Завтрак</span>
+                        </li>
+                        <li>
+                            <span class="program-time">10:00</span>
+                            <span class="program-event" data-translate="day3_10">Доработка в School 21</span>
+                        </li>
+                        <li>
+                            <span class="program-time">12:00</span>
+                            <span class="program-event" data-translate="day3_12">Подготовка презентаций</span>
+                        </li>
+                        <li>
+                            <span class="program-time">13:00</span>
+                            <span class="program-event" data-translate="day3_13">Обед</span>
+                        </li>
+                        <li>
+                            <span class="program-time">14:00</span>
+                            <span class="program-event" data-translate="day3_14">Переезд в Hilton</span>
+                        </li>
+                        <li>
+                            <span class="program-time">15:00</span>
+                            <span class="program-event" data-translate="day3_15">Финальные питчи (Hilton)</span>
+                        </li>
+                        <li>
+                            <span class="program-time">17:00</span>
+                            <span class="program-event" data-translate="day3_17">Оценка жюри</span>
+                        </li>
+                        <li>
+                            <span class="program-time">18:00</span>
+                            <span class="program-event" data-translate="day3_18">Награждение и закрытие</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Participants Section -->
+    <section class="py-20 bg-gradient-card" id="participants">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="participants_title">
+                    Кто может участвовать
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto" data-translate="participants_subtitle">
+                    Хакатон открыт для всех, кто готов создавать будущее с помощью AI
+                </p>
+            </div>
+            
+            <!-- Requirements -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">🎓</div>
+                        <h3 class="card-title" data-translate="participants_students">Студенты</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="participants_students_desc">Студенты IT специальностей и смежных направлений</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">💻</div>
+                        <h3 class="card-title" data-translate="participants_developers">Разработчики</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="participants_developers_desc">Опытные программисты и начинающие разработчики</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">🎨</div>
+                        <h3 class="card-title" data-translate="participants_designers">Дизайнеры</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="participants_designers_desc">UX/UI дизайнеры и специалисты по продуктовому дизайну</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">💼</div>
+                        <h3 class="card-title" data-translate="participants_entrepreneurs">Предприниматели</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="participants_entrepreneurs_desc">Бизнес-аналитики и стартап-основатели</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Teams -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-primary" data-translate="dev_title">Разработчики</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul class="space-y-2">
+                            <li class="flex items-center gap-2">
+                                <span class="text-secondary">•</span>
+                                <span data-translate="dev_frontend">Frontend разработчики</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-secondary">•</span>
+                                <span data-translate="dev_backend">Backend разработчики</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-secondary">•</span>
+                                <span data-translate="dev_mobile">Mobile разработчики</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-secondary">•</span>
+                                <span data-translate="dev_ai_ml">AI/ML инженеры</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-secondary">•</span>
+                                <span data-translate="dev_devops">DevOps инженеры</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-secondary" data-translate="design_title">Дизайнеры</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul class="space-y-2">
+                            <li class="flex items-center gap-2">
+                                <span class="text-accent">•</span>
+                                <span data-translate="design_ux_ui">UX/UI дизайнеры</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-accent">•</span>
+                                <span data-translate="design_product">Продуктовые дизайнеры</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-accent">•</span>
+                                <span data-translate="design_graphic">Графические дизайнеры</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-accent">•</span>
+                                <span data-translate="design_motion">Motion дизайнеры</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-accent">•</span>
+                                <span data-translate="design_3d">3D дизайнеры</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-accent" data-translate="business_title">Бизнес</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul class="space-y-2">
+                            <li class="flex items-center gap-2">
+                                <span class="text-primary">•</span>
+                                <span data-translate="business_product_manager">Продакт-менеджеры</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-primary">•</span>
+                                <span data-translate="business_analyst">Бизнес-аналитики</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-primary">•</span>
+                                <span data-translate="business_marketer">Маркетологи</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-primary">•</span>
+                                <span data-translate="business_entrepreneur">Предприниматели</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-primary">•</span>
+                                <span data-translate="business_founder">Стартап-основатели</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Criteria Section -->
+    <section class="py-20 bg-background" id="criteria">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="criteria_title">
+                    Критерии оценки
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto" data-translate="criteria_subtitle">
+                    Проекты будут оцениваться по четырем основным критериям
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">💡</div>
+                        <h3 class="card-title" data-translate="criteria_innovation">Инновации</h3>
+                        <div class="text-2xl font-bold text-primary">25%</div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="criteria_innovation_desc">Оригинальность и новизна идеи</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">🛠️</div>
+                        <h3 class="card-title" data-translate="criteria_implementation">Реализация</h3>
+                        <div class="text-2xl font-bold text-secondary">25%</div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="criteria_implementation_desc">Техническое качество и завершенность</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="card-title" data-translate="criteria_applicability">Применимость</h3>
+                        <div class="text-2xl font-bold text-accent">25%</div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="criteria_applicability_desc">Практическая ценность решения</p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">📊</div>
+                        <h3 class="card-title" data-translate="criteria_presentation">Презентация</h3>
+                        <div class="text-2xl font-bold text-primary">25%</div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="criteria_presentation_desc">Качество подачи и демонстрации</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prizes Section -->
+    <section class="py-20 bg-background" id="prizes">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="prizes_title">
+                    Призы и награды
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto" data-translate="prizes_subtitle">
+                    Победители получат ценные призы от организаторов
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-5xl mb-4">🥇</div>
+                        <h3 class="card-title" data-translate="first_place"></h3>
+                        <div class="text-2xl font-bold text-primary mb-2" data-translate="first_prize"></div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="first_prize_desc"></p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-5xl mb-4">🥈</div>
+                        <h3 class="card-title" data-translate="second_place"></h3>
+                        <div class="text-2xl font-bold text-secondary mb-2" data-translate="second_prize"></div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="second_prize_desc"></p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-5xl mb-4">🥉</div>
+                        <h3 class="card-title" data-translate="third_place"></h3>
+                        <div class="text-2xl font-bold text-accent mb-2" data-translate="third_prize"></div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="third_prize_desc"></p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-5xl mb-4">🎁</div>
+                        <h3 class="card-title" data-translate="special_prizes"></h3>
+                        <div class="text-2xl font-bold text-primary mb-2" data-translate="special_prizes_amount"></div>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="special_prizes_desc"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title text-center" data-translate="mentorship_title"></h3>
+                </div>
+                <div class="card-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4 text-primary" data-translate="mentorship_during"></h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center gap-2">
+                                    <span class="text-secondary">•</span>
+                                    <span data-translate="mentorship_tech"></span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="text-secondary">•</span>
+                                    <span data-translate="mentorship_business"></span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="text-secondary">•</span>
+                                    <span data-translate="mentorship_code"></span>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <span class="text-secondary">•</span>
+                                    <span data-translate="mentorship_presentation"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Timeline Section -->
+    <section class="py-20 bg-gradient-card" id="timeline">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="timeline_title">
+                    Дорожная карта
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto" data-translate="timeline_subtitle">
+                    Ключевые этапы подготовки и проведения хакатона
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="timeline-item">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">📝</span>
+                        <h3 class="text-xl font-semibold" data-translate="timeline_registration">Регистрация</h3>
+                    </div>
+                    <p class="text-muted-foreground mb-4" data-translate="timeline_registration_date">15 июля - 1 августа 2025</p>
+                    <p class="text-sm text-muted-foreground" data-translate="timeline_registration_desc">
+                        Подача заявок, отбор участников, формирование команд
+                    </p>
+                </div>
+                
+                <div class="timeline-item active">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">⏰</span>
+                        <h3 class="text-xl font-semibold" data-translate="timeline_preparation">Подготовка</h3>
+                    </div>
+                    <p class="text-muted-foreground mb-4" data-translate="timeline_preparation_date">Сейчас</p>
+                    <p class="text-sm text-muted-foreground" data-translate="timeline_preparation_desc">
+                        Подготовка задач, привлечение менторов, организация площадки
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">🚀</span>
+                        <h3 class="text-xl font-semibold" data-translate="timeline_hackathon">Хакатон</h3>
+                    </div>
+                    <p class="text-muted-foreground mb-4" data-translate="timeline_hackathon_date">6-8 августа 2025</p>
+                    <p class="text-sm text-muted-foreground" data-translate="timeline_hackathon_desc">
+                        6-7 августа: School 21 (разработка)<br>
+                        8 августа: Hilton (финал и награждение)
+                    </p>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">🎉</span>
+                        <h3 class="text-xl font-semibold" data-translate="timeline_results">Результаты</h3>
+                    </div>
+                    <p class="text-muted-foreground mb-4" data-translate="timeline_results_date">Август 2025</p>
+                    <p class="text-sm text-muted-foreground" data-translate="timeline_results_desc">
+                        Награждение, менторство, развитие лучших проектов
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="py-20 bg-gradient-hero" id="footer">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold mb-6 text-white" data-translate="footer_title">
+                    Готовы изменить мир?
+                </h2>
+                <p class="text-xl text-muted-foreground max-w-3xl mx-auto mb-8" data-translate="footer_subtitle">
+                    Присоединяйтесь к AI Хакатону Самарканд 2025 и создайте будущее вместе с нами
+                </p>
+                <div class="flex justify-center">
+                    <button class="btn btn-hero" onclick="openModal()">
+                        <span data-translate="register_btn">ПОДАТЬ ЗАЯВКУ</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">🚀</div>
+                        <h3 class="card-title" data-translate="footer_organizer">Организатор</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="footer_organizer_desc">
+                            <strong>Angel Connect</strong><br>
+                            Ведущая экосистема стартапов<br>
+                            в Центральной Азии
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">🏢</div>
+                        <h3 class="card-title" data-translate="footer_partners">Партнеры</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="footer_partners_desc">
+                            <strong>IT Park Uzbekistan</strong><br>
+                            Министерство цифровых технологий<br>
+                            Республики Узбекистан
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="text-4xl mb-4">📍</div>
+                        <h3 class="card-title" data-translate="footer_location">Место проведения</h3>
+                    </div>
+                    <div class="card-content">
+                        <p class="text-muted-foreground" data-translate="footer_location_desc">
+                            <strong>School 21</strong> (6-7 августа)<br>
+                            <strong>Hilton Samarkand</strong> (8 августа)<br>
+                            Самарканд, Узбекистан
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center pt-8 border-t border-white/20">
+                <p class="text-muted-foreground" data-translate="footer_copyright">
+                    © 2025 AI Хакатон Самарканд. Все права защищены.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Team Registration Modal -->
+    <div id="applicationModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- Language picker for modal -->
+                <div class="modal-language-picker">
+                    <button class="modal-lang-btn" onclick="toggleModalLanguagePicker()">
+                        <span class="current-lang">RU</span>
+                        <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 10l5 5 5-5z"/>
+                        </svg>
+                    </button>
+                    <div class="modal-lang-dropdown" id="modalLangDropdown">
+                        <button class="modal-lang-option" onclick="changeModalLanguage('ru')">RU</button>
+                        <button class="modal-lang-option" onclick="changeModalLanguage('uz')">UZ</button>
+                        <button class="modal-lang-option" onclick="changeModalLanguage('en')">EN</button>
+                    </div>
+                </div>
+                
+                <div class="modal-title-section">
+                    <h3 class="modal-title" data-translate="modal_title">Регистрация команды</h3>
+                    <p class="modal-subtitle" data-translate="modal_subtitle">AI Хакатон Самарканд • 6-8 августа 2025</p>
+                </div>
+                <button class="modal-close" type="button">
+                    <span class="text-2xl">✖️</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="mb-6 p-4 bg-white/5 rounded-lg border border-white/20">
+                    <h4 class="text-lg font-semibold mb-2 text-primary" data-translate="modal_conditions">📝 Важная информация</h4>
+                    <ul class="text-sm text-muted-foreground space-y-1">
+                        <li data-translate="modal_team_size">• Размер команды: от 3 до 5 человек</li>
+                        <li data-translate="modal_age">• Возраст участников: от 16 лет</li>
+                        <li data-translate="modal_selection">• Отбор команд: с 1 по 5 августа</li>
+                    </ul>
+                </div>
+                
+                <!-- Team Registration Form -->
+                <form id="applicationForm">
+                    <div class="form-group">
+                        <label class="form-label" data-translate="team_name">Название команды *</label>
+                        <input type="text" class="form-input" name="teamName" required data-translate-placeholder="team_name_placeholder">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" data-translate="team_leader_name">ФИО лидера команды *</label>
+                        <input type="text" class="form-input" name="leaderName" required data-translate-placeholder="team_leader_name_placeholder">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" data-translate="team_leader_telegram">Telegram лидера *</label>
+                        <input type="text" class="form-input" name="leaderTelegram" required data-translate-placeholder="team_leader_telegram_placeholder">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" data-translate="team_leader_phone">Номер телефона лидера *</label>
+                        <input type="tel" class="form-input" name="leaderPhone" required data-translate-placeholder="team_leader_phone_placeholder">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" data-translate="team_size">Количество участников в команде *</label>
+                        <select class="form-input" name="teamSize" required>
+                            <option value="" data-translate="team_size_placeholder">Выберите количество</option>
+                            <option value="3" data-translate="team_size_3">3 человека</option>
+                            <option value="4" data-translate="team_size_4">4 человека</option>
+                            <option value="5" data-translate="team_size_5">5 человек</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" data-translate="project_description">Описание идеи проекта (не более 2000 символов) *</label>
+                        <textarea class="form-input form-textarea" name="projectDescription" required maxlength="2000" data-translate-placeholder="project_description_placeholder"></textarea>
+                        <div class="char-counter">
+                            <span id="charCount">0</span>/2000
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="flex items-center gap-2">
+                            <input type="checkbox" class="form-checkbox" name="existingProject">
+                            <span class="text-sm" data-translate="existing_project">У нас есть существующий проект, и мы планируем создать для него новый AI-модуль на хакатоне</span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" data-translate="accommodation">Нужно ли размещение в общежитии School 21?</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="accommodation" value="no" checked>
+                                <span data-translate="accommodation_no">Нет, не нужно</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="accommodation" value="yes">
+                                <span data-translate="accommodation_yes">Да, нужно размещение</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" data-translate="equipment">Планируете использовать:</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="equipment" value="own" checked>
+                                <span data-translate="equipment_own">Собственные ноутбуки</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="equipment" value="school">
+                                <span data-translate="equipment_school">Компьютеры School 21 (Linux)</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="equipment" value="combined">
+                                <span data-translate="equipment_combined">Комбинированно</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-note" data-translate="form_note">
+                        Важно: При подаче заявки убедитесь, что все участники команды согласны с участием в хакатоне и могут присутствовать все 3 дня мероприятия.
+                    </div>
+                    
+                    <div class="flex gap-4 pt-4">
+                        <button type="submit" class="btn btn-hero flex-1" data-translate="form_submit">
+                            Подать заявку
+                        </button>
+                        <button type="button" class="btn btn-glass modal-cancel" data-translate="form_cancel">
+                            Отмена
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" data-translate="success_title">Заявка отправлена!</h3>
+                <button class="modal-close" type="button" onclick="closeSuccessModal()">
+                    <span class="text-2xl">✖️</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="success-icon mb-4">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                </div>
+                <p class="text-lg mb-6" data-translate="success_message">Ваша заявка успешно отправлена. Мы свяжемся с вами в ближайшее время.</p>
+                
+                <div class="telegram-section">
+                    <p class="mb-4" data-translate="telegram_join">Присоединяйтесь к нашему Telegram каналу:</p>
+                    <a href="https://t.me/+bDbZ96gZvf4xZTMy" target="_blank" class="btn btn-hero inline-flex items-center gap-2">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                        <span data-translate="telegram_channel">Канал участников хакатона</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/hackathon-translations.js?v=1.2"></script>
+    <script src="/hackathon-init.js?v=1.2"></script>
+</body>
+</html>

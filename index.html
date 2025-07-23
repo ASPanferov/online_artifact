@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Connect - Первая экосистема для стартапов в Центральной Азии</title>
+    <meta name="description" content="Angel Connect создает процветающую стартап-экосистему в Центральной Азии. Программы для стартапов, ангельские инвестиции, менторство и развитие.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- PhotoSwipe CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.4/dist/photoswipe.css">
+    
+    <!-- PhotoSwipe JS -->
+    <script src="https://unpkg.com/photoswipe@5.4.4/dist/photoswipe.umd.min.js"></script>
+    <script src="https://unpkg.com/photoswipe@5.4.4/dist/photoswipe-lightbox.umd.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="angel-connect-site.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body class="loading">
+    <!-- Navigation -->
+    <nav class="nav-header">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">
+                    <img src="/ac_logo_white.png" alt="Angel Connect Logo" class="logo-icon">
+                    <span class="logo-text">Angel Connect</span>
+                </a>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#programs" class="nav-link" data-translate="nav.programs">Programs</a>
+                <a href="#companies" class="nav-link" data-translate="nav.companies">Companies</a>
+                <a href="#events" class="nav-link" data-translate="nav.events">Events</a>
+                <a href="#resources" class="nav-link" data-translate="nav.resources">Resources</a>
+                <a href="#blog" class="nav-link" data-translate="nav.blog">Blog</a>
+                <a href="#about" class="nav-link" data-translate="nav.about">About</a>
+            </div>
+            
+            <div class="nav-actions">
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="language-btn" id="languageBtn">
+                        <i data-lucide="globe" class="language-icon"></i>
+                        <span class="current-lang">RU</span>
+                        <i data-lucide="chevron-down" class="dropdown-icon"></i>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <button class="lang-option active" data-lang="ru">
+                            <span class="lang-flag">🇷🇺</span>
+                            <span class="lang-name">Русский</span>
+                        </button>
+                        <button class="lang-option" data-lang="uz">
+                            <span class="lang-flag">🇺🇿</span>
+                            <span class="lang-name">O'zbek</span>
+                        </button>
+                        <button class="lang-option" data-lang="en">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">English</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Rock toggle (hidden on mobile) -->
+                <div class="rock-toggle-container">
+                    <i data-lucide="mountain" class="rock-icon"></i>
+                    <label class="rock-toggle">
+                        <input type="checkbox" id="rockToggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <a href="#apply" class="btn btn-primary" data-translate="nav.apply">Apply</a>
+            </div>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-links">
+            <a href="#programs" class="mobile-nav-link" data-translate="nav.programs">Programs</a>
+            <a href="#companies" class="mobile-nav-link" data-translate="nav.companies">Companies</a>
+            <a href="#events" class="mobile-nav-link" data-translate="nav.events">Events</a>
+            <a href="#resources" class="mobile-nav-link" data-translate="nav.resources">Resources</a>
+            <a href="#blog" class="mobile-nav-link" data-translate="nav.blog">Blog</a>
+            <a href="#about" class="mobile-nav-link" data-translate="nav.about">About</a>
+        </div>
+        <div class="mobile-nav-actions">
+            <!-- Mobile Language Switcher -->
+            <div class="mobile-language-switcher">
+                <div class="mobile-lang-options">
+                    <button class="mobile-lang-btn active" data-lang="ru">🇷🇺 Русский</button>
+                    <button class="mobile-lang-btn" data-lang="uz">🇺🇿 O'zbek</button>
+                    <button class="mobile-lang-btn" data-lang="en">🇬🇧 English</button>
+                </div>
+            </div>
+            <a href="#apply" class="btn btn-primary" data-translate="nav.apply">Подать заявку</a>
+            <a href="#join" class="btn btn-outline" data-translate="nav.join">Присоединиться к клубу</a>
+        </div>
+    </div>
+
+    <!-- Hackathon Banners Carousel -->
+    <section class="hackathon-banners-carousel">
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <!-- Samarkand Hackathon Banner -->
+                <div class="hackathon-banner hackathon-style active" data-slide="0">
+                    <div class="hackathon-bg"></div>
+                    <div class="hackathon-content">
+                        <div class="hackathon-info">
+                            <h3 class="hackathon-title" data-translate="hackathon_banner.title">AI ХАКАТОН САМАРКАНД</h3>
+                            <div class="hackathon-details">
+                                <span class="hackathon-detail">
+                                    <span class="detail-icon">📅</span>
+                                    <span data-translate="hackathon_banner.dates">6-8 августа 2025</span>
+                                </span>
+                                <span class="hackathon-detail">
+                                    <span class="detail-icon">👥</span>
+                                    <span data-translate="hackathon_banner.participants">100 участников</span>
+                                </span>
+                                <span class="hackathon-detail">
+                                    <span class="detail-icon">🎯</span>
+                                    <span data-translate="hackathon_banner.mentorship">Менторская поддержка 24/7</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hackathon-timer">
+                            <div class="timer-item">
+                                <span class="timer-number" id="hackathon-days">0</span>
+                                <span class="timer-label" data-translate="hackathon_banner.days">дней</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="hackathon-hours">00</span>
+                                <span class="timer-label" data-translate="hackathon_banner.hours">часов</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="hackathon-minutes">00</span>
+                                <span class="timer-label" data-translate="hackathon_banner.minutes">минут</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="hackathon-seconds">00</span>
+                                <span class="timer-label" data-translate="hackathon_banner.seconds">секунд</span>
+                            </div>
+                        </div>
+                        <div class="hackathon-action">
+                            <button class="btn-hackathon-details" onclick="navigateToHackathon()" data-translate="hackathon_banner.details_btn">
+                                Подробнее
+                                <span class="btn-arrow">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carousel Navigation Dots -->
+            <div class="carousel-dots">
+                <button class="carousel-dot active" data-slide="0" aria-label="Баннер 1"></button>
+                <!-- Additional dots will be added dynamically as more banners are added -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <!-- Летающий камень, следующий за курсором -->
+            <div class="graphic-element cursor-follower" id="cursorFollower"></div>
+            
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="hero-title-main">ANGEL CONNECT</span>
+                    <span class="hero-title-sub" data-translate="hero.subtitle">Первая частная экосистема для стартапов в Узбекистане</span>
+                </h1>
+                
+                <p class="hero-description" data-translate="hero.description">
+                    Мы помогаем стартапам получить инвестиции, менторство и экспертизу для успешного развития. 
+                    Проводим хакатоны общего трека и корпоративные для крупных компаний.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#apply" class="btn btn-primary btn-large">
+                        <span data-translate="hero.apply">Подать заявку</span>
+                        <span class="btn-icon">→</span>
+                    </a>
+                    <a href="#learn-more" class="btn btn-outline btn-large">
+                        <span data-translate="hero.learn_more">Узнать больше</span>
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label" data-translate="stats.teams">Команд</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label" data-translate="stats.participants">Участников</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label" data-translate="stats.projects">Проектов в портфолио</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="hero-graphic">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="programs">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="programs.title">Наши программы</h2>
+                <p class="section-subtitle" data-translate="programs.subtitle">Полный цикл поддержки от идеи до выхода на международные рынки</p>
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <i data-lucide="zap" class="program-icon"></i>
+                    <h3 class="program-title" data-translate="programs.hackathons.title">Хакатоны</h3>
+                    <p class="program-description" data-translate="programs.hackathons.description">Откройте двери в мир инноваций! Участвуйте в захватывающих соревнованиях, где рождаются революционные идеи и формируются команды будущего</p>
+                    <div class="program-features">
+                        <span class="feature">Поиск талантов</span>
+                        <span class="feature">Корпоративные треки</span>
+                        <span class="feature">Призовой фонд</span>
+                    </div>
+                </div>
+                
+                <div class="program-card featured">
+                    <i data-lucide="rocket" class="program-icon"></i>
+                    <h3 class="program-title" data-translate="programs.incubator.title">Инкубатор</h3>
+                    <p class="program-description" data-translate="programs.incubator.description">Превратите свою идею в успешный бизнес! Интенсивная 3-месячная программа с персональным менторством и прямым доступом к инвесторам</p>
+                    <div class="program-features">
+                        <span class="feature">3-месячная программа</span>
+                        <span class="feature">Менторство</span>
+                        <span class="feature">Demo Day</span>
+                    </div>
+                    <div class="program-badge" data-translate="programs.incubator.badge">В разработке</div>
+                </div>
+                
+                <div class="program-card">
+                    <i data-lucide="coins" class="program-icon"></i>
+                    <h3 class="program-title" data-translate="programs.angel_club.title">Ангельский клуб</h3>
+                    <p class="program-description" data-translate="programs.angel_club.description">Эксклюзивное сообщество влиятельных инвесторов и успешных предпринимателей. Откройте для себя самые перспективные стартапы региона</p>
+                    <div class="program-features">
+                        <span class="feature">Закрытое сообщество</span>
+                        <span class="feature">Ежеквартальные встречи</span>
+                        <span class="feature">Питчинги</span>
+                    </div>
+                </div>
+                
+                <div class="program-card">
+                    <i data-lucide="settings" class="program-icon"></i>
+                    <h3 class="program-title" data-translate="programs.consulting.title">Менторство</h3>
+                    <p class="program-description" data-translate="programs.consulting.description">Профессиональное наставничество от опытных предпринимателей. Мы помогаем стартапам достичь investment-ready статуса и получить экспертизу в ключевых направлениях</p>
+                    <div class="program-features">
+                        <span class="feature">1-на-1 менторинг</span>
+                        <span class="feature">Экспертные сессии</span>
+                        <span class="feature">Подготовка к питчу</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section id="companies" class="companies">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="companies.title">Портфолио проектов</h2>
+                <p class="section-subtitle" data-translate="companies.subtitle">Инновационные решения от участников хакатонов и партнерских проектов</p>
+            </div>
+            
+            <div class="companies-filters">
+                <div class="filter-group">
+                    <h4 class="filter-group-title" data-translate="companies.filters.by_program">По программе:</h4>
+                    <div class="filter-buttons">
+                        <button class="filter-btn" data-filter="all" data-translate="companies.filters.all">Все</button>
+                        <button class="filter-btn active" data-filter="hackathon" data-translate="companies.filters.hackathon">Хакатонные</button>
+                        <button class="filter-btn" data-filter="incubator" data-translate="companies.filters.incubator">Инкубаторские</button>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h4 class="filter-group-title" data-translate="companies.filters.by_industry">По индустрии:</h4>
+                    <div class="filter-buttons">
+                        <button class="filter-btn" data-filter="ai" data-translate="companies.filters.ai">AI/ИИ</button>
+                        <button class="filter-btn" data-filter="hrtech" data-translate="companies.filters.hrtech">HR Tech</button>
+                        <button class="filter-btn" data-filter="analytics" data-translate="companies.filters.analytics">Analytics</button>
+                        <button class="filter-btn" data-filter="ecommerce" data-translate="companies.filters.ecommerce">E-commerce</button>
+                        <button class="filter-btn" data-filter="fintech" data-translate="companies.filters.fintech">FinTech</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="companies-grid">
+                <!-- Companies will be loaded dynamically from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="events.title">Мероприятия</h2>
+                <p class="section-subtitle" data-translate="events.subtitle">Хакатоны, pitch-сессии, встречи сообщества и образовательные мероприятия</p>
+            </div>
+            
+            <div class="events-grid">
+                <!-- Samarkand Hackathon Featured Event -->
+                <div class="event-card hackathon-event featured-event" onclick="navigateToHackathon()">
+                    <div class="event-hackathon-bg"></div>
+                    <div class="event-date hackathon-date">
+                        <div class="event-day">6-8</div>
+                        <div class="event-month" data-translate="hackathon_event.month">АВГ</div>
+                    </div>
+                    <div class="event-content">
+                        <h3 class="event-title" data-translate="hackathon_event.title">AI Хакатон Самарканд 2025</h3>
+                        <p class="event-description" data-translate="hackathon_event.description">3-дневный интенсивный хакатон с международным участием</p>
+                        <div class="event-meta">
+                            <span class="event-location">
+                                <span class="location-icon">🏛️</span>
+                                <span data-translate="hackathon_event.location">Самарканд</span>
+                            </span>
+                            <span class="event-type hackathon-type" data-translate="hackathon_event.type">Хакатон</span>
+                        </div>
+                        <button class="btn btn-outline event-participate-btn hackathon-btn" onclick="navigateToHackathon()">
+                            <span data-translate="hackathon_banner.details_btn">Подробнее</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Events will be loaded dynamically from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="resources.title">Ресурсы</h2>
+                <p class="section-subtitle" data-translate="resources.subtitle">Галерея фотографий с наших мероприятий и полезные материалы</p>
+            </div>
+            
+            <div class="gallery-container" id="galleryContainer">
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Gallery items will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="blog.title">Блог</h2>
+                <p class="section-subtitle" data-translate="blog.subtitle">Новости, статьи и истории успеха стартап-экосистемы</p>
+            </div>
+            
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog posts will be dynamically loaded here -->
+            </div>
+            
+            <div class="blog-placeholder" id="blogPlaceholder" style="display: none;">
+                <i data-lucide="pen-tool" class="placeholder-icon"></i>
+                <h3 data-translate="blog.placeholder.title">Пока нет опубликованных статей</h3>
+                <p data-translate="blog.placeholder.description">Следите за обновлениями - скоро здесь появятся интересные материалы о развитии стартапов.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="about" class="team">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="team.title">Наша команда</h2>
+                <p class="section-subtitle" data-translate="team.subtitle">Опытные предприниматели и инвесторы, объединенные общей миссией</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Team members will be loaded dynamically from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="section-container">
+            <div class="cta-content">
+                <h2 class="cta-title" data-translate="cta.title">Готовы начать свой путь?</h2>
+                <p class="cta-description" data-translate="cta.description">Присоединяйтесь к экосистеме Angel Connect и развивайте свой стартап с нашей поддержкой</p>
+                <div class="cta-actions">
+                    <a href="#apply" class="btn btn-primary btn-large" data-translate="cta.apply_startup">Подать заявку стартапа</a>
+                    <a href="#join" class="btn btn-outline btn-large" data-translate="cta.become_investor">Стать ангел-инвестором</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="/ac_logo_white.png" alt="Angel Connect Logo" class="logo-icon">
+                        <span class="logo-text">Angel Connect</span>
+                    </div>
+                    <p class="footer-description" data-translate="footer.description">
+                        Первая экосистема для стартапов в Центральной Азии.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title" data-translate="footer.contacts">Контакты</h4>
+                    <ul class="footer-contacts">
+                        <li><a href="https://t.me/networkangelconnect" target="_blank" class="contact-link"><i data-lucide="message-circle" class="contact-icon"></i> @networkangelconnect</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Angel Connect. <span data-translate="footer.rights">Все права защищены.</span> <span class="version-info" id="siteVersion">v1.2.1</span></p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">LinkedIn</a>
+                    <a href="#" class="social-link">Telegram</a>
+                    <a href="#" class="social-link">Twitter</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Version Info -->
+    <script src="version.js"></script>
+    
+    <!-- JavaScript -->
+    <script type="module" src="angel-connect-site.js"></script>
+    
+    <!-- Initialize Lucide Icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+        });
+    </script>
+    
+    <!-- Telegram Notification Script -->
+    <script>
+        // Telegram notification functions for Angel Connect
+        async function sendTelegramNotification(applicationId, applicationData) {
+            const TELEGRAM_BOT_TOKEN = '7697980537:AAF_Ov07LzeZ1DiNf5RpS1kgOihD3-6LaBc';
+            const TELEGRAM_CHAT_ID = '-4781719100';
+            
+            console.log('🚀 Starting Telegram notification process...');
+            console.log('📱 Bot Token (first 10 chars):', TELEGRAM_BOT_TOKEN.substring(0, 10) + '...');
+            console.log('💬 Chat ID:', TELEGRAM_CHAT_ID);
+            console.log('🆔 Application ID:', applicationId);
+            console.log('📋 Application Data Type:', applicationData.type);
+            
+            try {
+                // Format message
+                console.log('📝 Formatting message...');
+                const message = formatTelegramMessage(applicationData, applicationId);
+                console.log('📄 Formatted message length:', message.length);
+                console.log('📄 Message preview:', message.substring(0, 100) + '...');
+                
+                // Send to Telegram Bot API
+                const telegramApiUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                console.log('🌐 Telegram API URL:', telegramApiUrl.replace(TELEGRAM_BOT_TOKEN, 'TOKEN_HIDDEN'));
+                
+                const payload = {
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown',
+                    disable_web_page_preview: true
+                };
+                
+                console.log('📦 Sending payload to Telegram...');
+                
+                const response = await fetch(telegramApiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                console.log('📡 Response status:', response.status);
+                console.log('📡 Response status text:', response.statusText);
+                
+                const result = await response.json();
+                console.log('📨 Telegram API response:', result);
+                
+                if (result.ok) {
+                    console.log('✅ Telegram notification sent successfully!');
+                    console.log('📩 Message ID:', result.result.message_id);
+                    return result;
+                } else {
+                    console.error('❌ Telegram API returned error:', result);
+                    throw new Error(`Telegram API error: ${result.description || 'Unknown error'}`);
+                }
+            } catch (error) {
+                console.error('💥 Exception in sendTelegramNotification:', error);
+                console.error('💥 Error name:', error.name);
+                console.error('💥 Error message:', error.message);
+                console.error('💥 Error stack:', error.stack);
+                throw error;
+            }
+        }
+        
+        function formatTelegramMessage(data, applicationId) {
+            const emoji = data.type === 'startup' ? '🚀' : '💼';
+            const title = data.type === 'startup' ? 'НОВАЯ ЗАЯВКА СТАРТАПА' : 'НОВАЯ ЗАЯВКА ИНВЕСТОРА';
+            
+            let message = `${emoji} *${title}*\n\n`;
+            message += `📋 *ID:* \`${applicationId}\`\n`;
+            
+            if (data.type === 'startup') {
+                message += `🏢 *Стартап:* ${data.companyName || 'Не указано'}\n`;
+                message += `👤 *Основатель:* ${data.formData?.founderName || data.name || 'Не указано'}\n`;
+                message += `📧 *Email:* ${data.email || 'Не указан'}\n`;
+                message += `📞 *Телефон:* ${data.phone || 'Не указан'}\n`;
+                message += `🎯 *Стадия:* ${data.stage || 'Не указано'}\n`;
+                message += `📝 *Описание:* ${data.description || 'Не указано'}\n`;
+            } else {
+                message += `👤 *Инвестор:* ${data.name || 'Не указано'}\n`;
+                message += `📧 *Email:* ${data.email || 'Не указан'}\n`;
+                message += `📞 *Телефон:* ${data.phone || 'Не указан'}\n`;
+                message += `💡 *Опыт:* ${data.experience || 'Не указано'}\n`;
+                message += `💰 *Бюджет:* ${data.investmentRange || 'Не указано'}\n`;
+                message += `🎯 *Сектора:* ${data.sectors || 'Не указано'}\n`;
+            }
+            
+            message += `\n⏰ *Время подачи:* ${new Date(data.submittedAt?.toDate ? data.submittedAt.toDate() : data.submittedAt).toLocaleString('ru-RU')}\n`;
+            message += `📊 *Статус:* ${data.status || 'submitted'}\n`;
+            
+            // Add CRM link
+            message += `\n🔗 *Управление:* [Открыть в CRM](https://angelconnect-49d81.firebaseapp.com/crm.html)`;
+            
+            return message;
+        }
+        
+        // Make functions globally available
+        window.sendTelegramNotification = sendTelegramNotification;
+        window.formatTelegramMessage = formatTelegramMessage;
+        
+        // Test function
+        window.testTelegramNotification = async function() {
+            try {
+                console.log('🧪 Testing Telegram notification...');
+                
+                const testData = {
+                    type: 'startup',
+                    companyName: 'TestStartup Debug',
+                    name: 'TestStartup Debug',
+                    email: 'debug@test.com',
+                    phone: '+998901234567',
+                    stage: 'mvp',
+                    description: 'Тестовая заявка для отладки системы уведомлений',
+                    formData: {
+                        founderName: 'Тест Дебаггер',
+                        startupName: 'TestStartup Debug'
+                    },
+                    status: 'submitted',
+                    submittedAt: new Date()
+                };
+                
+                const testId = 'DEBUG-' + Date.now();
+                const result = await sendTelegramNotification(testId, testData);
+                
+                console.log('✅ Test notification sent successfully:', result);
+                alert('✅ Тестовое уведомление отправлено! Проверьте Telegram группу.');
+                
+            } catch (error) {
+                console.error('❌ Test notification failed:', error);
+                alert('❌ Ошибка при отправке тестового уведомления: ' + error.message);
+            }
+        };
+    </script>
+</body>
+</html>
